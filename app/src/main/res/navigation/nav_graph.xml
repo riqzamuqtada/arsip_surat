@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.kospin.myapplication.fragment.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/allSuratFragment"
+        android:name="com.kospin.myapplication.fragment.AllSuratFragment"
+        android:label="fragment_all_surat"
+        tools:layout="@layout/fragment_all_surat" />
+    <fragment
+        android:id="@+id/suratMasukFragment"
+        android:name="com.kospin.myapplication.fragment.SuratMasukFragment"
+        android:label="fragment_surat_masuk"
+        tools:layout="@layout/fragment_surat_masuk" />
+    <fragment
+        android:id="@+id/suratKeluarFragment"
+        android:name="com.kospin.myapplication.fragment.SuratKeluarFragment"
+        android:label="fragment_surat_keluar"
+        tools:layout="@layout/fragment_surat_keluar" />
+    <activity
+        android:id="@+id/inputActivity"
+        android:name="com.kospin.myapplication.InputActivity"
+        android:label="activity_input"
+        tools:layout="@layout/activity_input" />
+</navigation>
