@@ -35,7 +35,7 @@
         android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:ems="15"
         android:hint="****"
         android:inputType="textPassword"
