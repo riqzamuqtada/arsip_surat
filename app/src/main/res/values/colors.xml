@@ -2,4 +2,23 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    // Main Pallet
+    <color name="main_blue_light">#3A6EA5</color>
+    <color name="main_blue_dark">#004E98</color>
+    <color name="main_orange">#FF6700</color>
+    <color name="main_white_light">#EBEBEB</color>
+    <color name="main_white_dark">#C0C0C0</color>
+
+    // Rainbow Pallet
+    <color name="rnbw_green">#06D6A0</color>
+    <color name="rnbw_blue">#29ABE2</color>
+    <color name="rnbw_red">#EF476F</color>
+    <color name="rnbw_purple">#A663CC</color>
+    <color name="rnbw_yellow">#FFC43D</color>
+    <color name="rnbw_orange">#FF8A5B</color>
+
+    // Solid Pallet
+    <color name="clr_red">#EF4747</color>
+    <color name="clr_green">#06d671</color>
 </resources>
