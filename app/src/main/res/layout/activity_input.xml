@@ -21,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="590dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/bg_card_surat"
@@ -35,7 +35,7 @@
             android:id="@+id/tvFormTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="48dp"
             android:fontFamily="@font/ubuntu_bold"
             android:text="Tambah Arsip Surat"
             android:textColor="@color/main_blue_dark"
@@ -46,11 +46,11 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="32dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="48dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,8 @@
                 android:fontFamily="@font/poppins"
                 android:hint="Ex : 127/Div.Ops/F/JS/VII/2023"
                 android:inputType="text"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_hint" />
 
             <TextView
                 android:id="@+id/tvLabelHal"
@@ -95,11 +96,12 @@
                 android:fontFamily="@font/poppins"
                 android:hint="Ex : Perayaan HUT RI Ke-78"
                 android:inputType="text"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_hint" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="80dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -120,7 +122,8 @@
                     <Spinner
                         android:id="@+id/spInputJenis"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -142,14 +145,15 @@
                     <Spinner
                         android:id="@+id/spInputDivisi"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="70dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
@@ -157,6 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:paddingEnd="12dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -167,15 +172,29 @@
                         android:text="Tanggal :"
                         android:textColor="@color/main_blue_dark" />
 
-                    <TextView
-                        android:id="@+id/tvInputTanggal"
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center_vertical"
-                        android:hint="12/04/2022"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tvInputTanggal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableStart="@drawable/ic_calender"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/main_blue_light"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:hint="12/09/2023"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/dark_hint"
+                            android:textSize="18sp" />
+
+                    </HorizontalScrollView>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -192,15 +211,25 @@
                         android:text="Foto :"
                         android:textColor="@color/main_blue_dark" />
 
-                    <TextView
-                        android:id="@+id/tvInputFoto"
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center_vertical"
-                        android:hint="Input Foto"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tvInputFoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableStart="@drawable/ic_add_image"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/main_blue_light"
+                            android:fontFamily="@font/poppins"
+                            android:gravity="center_vertical"
+                            android:hint="Input Foto"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/dark_hint"
+                            android:textSize="18sp" />
+
+                    </HorizontalScrollView>
 
                 </LinearLayout>
             </LinearLayout>
@@ -217,7 +246,7 @@
                 android:id="@+id/etInputCatatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/main_blue_dark"
                 android:ems="10"
                 android:fontFamily="@font/poppins"
@@ -225,7 +254,8 @@
                 android:hint="Tambahkan Catatan(optional)"
                 android:inputType="textMultiLine"
                 android:lines="2"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_hint" />
 
             <LinearLayout
                 android:layout_width="match_parent"
