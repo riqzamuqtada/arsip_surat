@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
                             .putExtra("username", inputUsername.text.toString())
                     )
                     finish()
+                    alert("Hello Admin")
                 } else{
                     alert("Username dan Password salah")
                 }
