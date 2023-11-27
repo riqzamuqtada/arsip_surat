@@ -22,8 +22,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="590dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/bg_card_surat"
         android:elevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,14 +66,16 @@
                 android:textColor="@color/main_blue_dark" />
 
             <EditText
-                android:id="@+id/etFormNomor"
+                android:id="@+id/etInputNomor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/main_blue_dark"
                 android:ems="10"
+                android:fontFamily="@font/poppins"
                 android:hint="Ex : 127/Div.Ops/F/JS/VII/2023"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tvLabelHal"
@@ -84,14 +86,16 @@
                 android:textColor="@color/main_blue_dark" />
 
             <EditText
-                android:id="@+id/spFormHal"
+                android:id="@+id/spInputHal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/main_blue_dark"
                 android:ems="10"
+                android:fontFamily="@font/poppins"
                 android:hint="Ex : Perayaan HUT RI Ke-78"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,11 +114,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ubuntu_medium"
-                        android:text="Jenis :"
+                        android:text="Jenis Surat :"
                         android:textColor="@color/main_blue_dark" />
 
                     <Spinner
-                        android:id="@+id/spFormJenis"
+                        android:id="@+id/spInputJenis"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
@@ -136,7 +140,7 @@
                         android:textColor="@color/main_blue_dark" />
 
                     <Spinner
-                        android:id="@+id/spFormDivisi"
+                        android:id="@+id/spInputDivisi"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
@@ -145,8 +149,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="84dp"
-                android:layout_marginBottom="4dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -163,14 +167,15 @@
                         android:text="Tanggal :"
                         android:textColor="@color/main_blue_dark" />
 
-                    <EditText
-                        android:id="@+id/ipFormTanggal"
+                    <TextView
+                        android:id="@+id/tvInputTanggal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/main_blue_dark"
-                        android:ems="10"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center_vertical"
                         android:hint="12/04/2022"
-                        android:inputType="text" />
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -187,21 +192,16 @@
                         android:text="Foto :"
                         android:textColor="@color/main_blue_dark" />
 
-                    <EditText
-                        android:id="@+id/ipFormFoto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/main_blue_dark"
-                        android:ems="10"
-                        android:hint="Input Foto"
-                        android:inputType="text" />
-
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/tvInputFoto"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="file_name"
-                        android:textAlignment="textEnd" />
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center_vertical"
+                        android:hint="Input Foto"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -214,16 +214,18 @@
                 android:textColor="@color/main_blue_dark" />
 
             <EditText
-                android:id="@+id/etFormCatatan"
+                android:id="@+id/etInputCatatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:backgroundTint="@color/main_blue_dark"
                 android:ems="10"
+                android:fontFamily="@font/poppins"
                 android:gravity="start|top"
                 android:hint="Tambahkan Catatan(optional)"
                 android:inputType="textMultiLine"
-                android:lines="2" />
+                android:lines="2"
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -231,7 +233,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSuratInsert"
+                    android:id="@+id/btnInputInsert"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:background="@drawable/btn_action_form_surat"
@@ -241,7 +243,7 @@
                     android:textColor="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSuratUpdate"
+                    android:id="@+id/btnInputUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:background="@drawable/btn_action_form_surat"
