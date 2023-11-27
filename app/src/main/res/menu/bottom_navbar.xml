@@ -3,18 +3,24 @@
 
     <item
         android:id="@+id/dashboardFragment"
-        android:title="dasboard"/>
+        android:title="Dashboard"
+        android:icon="@drawable/ic_nav_dashboard"/>
     <item
         android:id="@+id/allSuratFragment"
-        android:title="all"/>
+        android:title="Semua Surat"
+        android:icon="@drawable/ic_nav_allsurat"/>
     <item
         android:id="@+id/inputActivity"
-        android:title="tambah"/>
+        android:title="Tambah"
+        android:icon="@drawable/ic_nav_tambah"
+        android:iconTint="@color/main_blue_dark"/>
     <item
         android:id="@+id/suratMasukFragment"
-        android:title="masuk"/>
+        android:title="Surat Masuk"
+        android:icon="@drawable/ic_nav_suratmasuk"/>
     <item
         android:id="@+id/suratKeluarFragment"
-        android:title="keluar"/>
+        android:title="Surat Keluar"
+        android:icon="@drawable/ic_nav_suratkeluar"/>
 
 </menu>

@@ -21,4 +21,9 @@
     // Solid Pallet
     <color name="clr_red">#EF4747</color>
     <color name="clr_green">#06d671</color>
+    
+    // Dark Pallet
+    <color name="dark_easy">#909090</color>
+    <color name="dark_medium">#737373</color>
+    <color name="dark_hard">#404040</color>
 </resources>

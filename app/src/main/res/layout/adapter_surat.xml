@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginVertical="6dp"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    app:cardCornerRadius="12dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/bg_adapter_surat" />
+
+        <TextView
+            android:id="@+id/tvAdpNomor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="-4dp"
+            android:layout_marginTop="18dp"
+            android:layout_toEndOf="@+id/imageView4"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Nomor Surat"
+            android:textColor="@color/dark_medium"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvAdpHal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvAdpNomor"
+            android:layout_alignStart="@+id/tvAdpNomor"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="-4dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Tentang Arsip Surat"
+            android:textColor="@color/main_blue_dark"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lbAdpTanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvAdpHal"
+            android:layout_alignStart="@+id/tvAdpHal"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/poppins"
+            android:text="Tanggal"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/lbAdpDivisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbAdpTanggal"
+            android:layout_alignStart="@+id/lbAdpTanggal"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="-2dp"
+            android:fontFamily="@font/poppins"
+            android:text="ke/dari"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lbAdpDivisi"
+            android:layout_alignTop="@+id/lbAdpTanggal"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/lbAdpTanggal"
+            android:fontFamily="@font/poppins"
+            android:text=":"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvAdpTanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lbAdpDivisi"
+            android:layout_alignTop="@+id/textView10"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/textView10"
+            android:fontFamily="@font/poppins"
+            android:text="12 September 2012"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvAdpDivisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvAdpTanggal"
+            android:layout_alignTop="@+id/textView11"
+            android:layout_alignBottom="@+id/textView11"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/poppins"
+            android:text="Div. Pengembangan"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbAdpTanggal"
+            android:layout_alignStart="@+id/textView10"
+            android:layout_alignBottom="@+id/lbAdpDivisi"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/poppins"
+            android:text=":"
+            android:textColor="@color/black" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lbAdpStatus"
+            android:layout_width="70dp"
+            android:layout_height="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="@drawable/lb_adp_status_masuk">
+
+            <TextView
+                android:id="@+id/tvAdpStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="masuk"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/btnAdpUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnAdpDelete"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_adp_update"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_adapter_update" />
+
+        <ImageButton
+            android:id="@+id/btnAdpDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/btn_adp_delete"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_adapter_delete" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
