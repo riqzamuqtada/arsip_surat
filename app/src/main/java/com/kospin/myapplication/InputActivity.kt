@@ -52,6 +52,13 @@ class InputActivity : AppCompatActivity() {
         find = ActivityInputBinding.inflate(layoutInflater)
         setContentView(find.root)
 
+        val id: Int = intent.getIntExtra("id",-1)
+        if (id == -1){
+            modeTambah()
+        } else {
+            modeUpdate(id)
+        }
+
         val dataDivisi = arrayOf("unit/divisi", "Pengurus", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional", "Kesekretariatan")
         val spnDivisi = find.spInputDivisi
         setupSpinner(spnDivisi, dataDivisi, opsiDivisi)
@@ -118,6 +125,16 @@ class InputActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun modeUpdate(id: Int) {
+        find.btnInputInsert.visibility = View.GONE
+        find.tvFormTitle.setText("Update Arsip Surat")
+    }
+
+    private fun modeTambah() {
+        find.btnInputUpdate.visibility = View.GONE
+        find.tvFormTitle.setText("Tambah Arsip Surat")
     }
 
     private fun insertSurat() {
