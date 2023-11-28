@@ -4,14 +4,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ViewManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.kospin.myapplication.databinding.ActivityLoginBinding
-import com.kospin.myapplication.viewModel.MyViewModel
-import androidx.activity.viewModels
 
 class LoginActivity : AppCompatActivity() {
 
@@ -33,13 +29,13 @@ class LoginActivity : AppCompatActivity() {
 
         find.btnLogin.setOnClickListener {
             if (inputUsername.text.isNotEmpty() && inputPassword.text.isNotEmpty()){
-                if (inputUsername.text.toString() !== username && inputPassword.text.toString() !== password){
+                if (inputUsername.text.toString() == username && inputPassword.text.toString() == password){
                     startActivity(
                         Intent(this, MainActivity::class.java)
                             .putExtra("username", inputUsername.text.toString())
                     )
                     finish()
-                    alert("Hello Admin")
+                    alert("Hello ${inputUsername.text}")
                 } else{
                     alert("Username dan Password salah")
                 }
