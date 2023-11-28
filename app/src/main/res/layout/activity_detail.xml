@@ -8,6 +8,12 @@
     android:background="@color/main_white_light"
     tools:context=".DetailActivity">
 
-
+    <fragment
+        android:id="@+id/navhost_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/detail_nav"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

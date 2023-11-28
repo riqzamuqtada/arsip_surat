@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoadingActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".LoadingActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -26,7 +26,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/bg_loading_bottomright" />
-     <TextView
+
+    <TextView
         android:id="@+id/tv_loading_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
