@@ -87,7 +87,7 @@
                 android:textColor="@color/main_blue_dark" />
 
             <EditText
-                android:id="@+id/spInputHal"
+                android:id="@+id/etInputHal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"

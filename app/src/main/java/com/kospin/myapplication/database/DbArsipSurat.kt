@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Surat::class], version = 1)
+@Database(entities = [Surat::class], version = 4)
 abstract class DbArsipSurat : RoomDatabase(){
     abstract fun dao() : DAO
     companion object{

@@ -14,6 +14,5 @@ data class Surat (
     @ColumnInfo("divisi")   val divisi      : String,
     @ColumnInfo("tanggal")  val tanggal     : String,
     @ColumnInfo("catatan")  val catatan     : String,
-    @ColumnInfo("gambar")   val gambar      : String
-
-    )
+    @ColumnInfo("gambar")   val gambar      : ByteArray
+)
