@@ -22,8 +22,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/bg_card_surat"
         android:elevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,7 +76,7 @@
                 android:hint="Ex : 127/Div.Ops/F/JS/VII/2023"
                 android:inputType="text"
                 android:textColor="@color/black"
-                android:textColorHint="@color/dark_hint" />
+                android:textColorHint="@color/text_hint" />
 
             <TextView
                 android:id="@+id/tvLabelHal"
@@ -97,7 +97,7 @@
                 android:hint="Ex : Perayaan HUT RI Ke-78"
                 android:inputType="text"
                 android:textColor="@color/black"
-                android:textColorHint="@color/dark_hint" />
+                android:textColorHint="@color/text_hint" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -161,8 +161,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingEnd="12dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingEnd="12dp">
 
                     <TextView
                         android:id="@+id/tvLabelTanggal"
@@ -186,11 +186,11 @@
                             android:ellipsize="end"
                             android:fontFamily="@font/poppins"
                             android:gravity="center_vertical"
+                            android:hint="12/09/2023"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:hint="12/09/2023"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/dark_hint"
+                            android:textColorHint="@color/text_hint"
                             android:textSize="18sp" />
 
                     </HorizontalScrollView>
@@ -226,7 +226,7 @@
                             android:gravity="center_vertical"
                             android:hint="Input Foto"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/dark_hint"
+                            android:textColorHint="@color/text_hint"
                             android:textSize="18sp" />
 
                     </HorizontalScrollView>
@@ -255,7 +255,7 @@
                 android:inputType="textMultiLine"
                 android:lines="2"
                 android:textColor="@color/black"
-                android:textColorHint="@color/dark_hint" />
+                android:textColorHint="@color/text_hint" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -289,7 +289,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/btnInputBack"
         android:layout_width="84dp"
         android:layout_height="84dp"
         android:layout_marginEnd="-75dp"
