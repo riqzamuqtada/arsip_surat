@@ -282,6 +282,7 @@
                         android:id="@+id/tvDetailCatatan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="kosong"
                         android:text="Lorem ipsum dolor sit amet,  consectetur adipiscing elit, sed do it."
                         android:textColor="@color/text_secondary" />
                 </LinearLayout>
@@ -290,7 +291,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button"
+            android:id="@+id/btnDetailBack"
             android:layout_width="140dp"
             android:layout_height="36dp"
             android:layout_marginStart="16dp"
@@ -365,15 +366,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
-            <ImageView
+            <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/imgPhotoView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/bg_adapter_surat"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

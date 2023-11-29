@@ -236,7 +236,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/btnDetailBack"
         android:layout_width="140dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"

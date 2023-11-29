@@ -10,7 +10,7 @@ import androidx.room.Update
 interface DAO {
     @Query("SELECT * FROM tb_surat")
     fun getAllSrt() : List<Surat>
-    @Query("SELECT id, no_surat, hal, jenis, divisi, tanggal FROM tb_surat")
+    @Query("SELECT id, no_surat, hal, jenis, divisi, tanggal FROM tb_surat ORDER BY id DESC")
     fun getSrtNoFoto() : List<DataAdapterSurat>
     @Insert
     fun insertSrt(surat: Surat)
@@ -18,4 +18,6 @@ interface DAO {
     fun updateSrt(surat: Surat)
     @Delete
     fun deleteSrt(surat: Surat)
+    @Query("SELECT * FROM tb_surat WHERE id = :id")
+    fun getById(id: Int) : List<Surat>
 }

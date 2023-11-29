@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         }
         find.btnLogin.setOnClickListener {
             if (inputUsername.text.isNotEmpty() && inputPassword.text.isNotEmpty()){
-                if (inputUsername.text.toString() == username && inputPassword.text.toString() == password){
+                if (inputPassword.text.toString() == password){
                     startActivity(
                         Intent(this, MainActivity::class.java)
                             .putExtra("username", inputUsername.text.toString())
