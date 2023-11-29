@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,8 +26,9 @@ class LoginActivity : AppCompatActivity() {
         val inputUsername = find.etUsername
         val inputPassword = find.etPassword
         checkStoragePermission()
-//        myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
-
+        find.btnIzinSubmit.setOnClickListener {
+            checkStoragePermission()
+        }
         find.btnLogin.setOnClickListener {
             if (inputUsername.text.isNotEmpty() && inputPassword.text.isNotEmpty()){
                 if (inputUsername.text.toString() == username && inputPassword.text.toString() == password){
@@ -72,10 +74,11 @@ class LoginActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Izin diberikan, lanjutkan dengan operasi membaca file
                 // Misalnya, panggil metode untuk membaca file gambar di sini
+                find.lyLoginIzin.visibility = View.GONE
             } else {
                 // Izin ditolak, beri tahu pengguna atau atasi sesuai kebutuhan
 //                Toast.makeText(this, "Izin akses penyimpanan ditolak", Toast.LENGTH_SHORT).show()
-                System.exit(0)
+                find.lyLoginIzin.visibility = View.VISIBLE
             }
         }
     }
