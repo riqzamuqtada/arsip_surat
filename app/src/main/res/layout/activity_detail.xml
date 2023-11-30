@@ -15,7 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
-            android:layout_height="560dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/bg_detail_card"
@@ -64,10 +64,12 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="36dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginBottom="60dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -86,6 +88,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:text="No Surat"
                         android:textColor="@color/main_blue_dark"
+                        android:textSize="16sp"
                         tools:layout_editor_absoluteX="-50dp"
                         tools:layout_editor_absoluteY="635dp" />
 
@@ -98,7 +101,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text=":"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvDetailNomor"
@@ -107,7 +111,9 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text="127/Div.Ops/F/JS/VII/2023"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textColorHint="@color/text_hint"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -123,7 +129,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Hal"
-                        android:textColor="@color/main_blue_dark" />
+                        android:textColor="@color/main_blue_dark"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/textView16"
@@ -134,7 +141,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text=":"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvDetailHal"
@@ -143,7 +151,9 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text="Perayaan HUT RI Ke-78"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textColorHint="@color/text_hint"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -159,7 +169,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Jenis"
-                        android:textColor="@color/main_blue_dark" />
+                        android:textColor="@color/main_blue_dark"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/textView17"
@@ -170,7 +181,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text=":"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvDetailJenis"
@@ -179,7 +191,9 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text="Surat Masuk"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textColorHint="@color/text_hint"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -195,7 +209,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="ke/dari"
-                        android:textColor="@color/main_blue_dark" />
+                        android:textColor="@color/main_blue_dark"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/textView18"
@@ -206,7 +221,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text=":"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvDetailDivisi"
@@ -215,7 +231,9 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text="Div. Operasional "
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textColorHint="@color/text_hint"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -231,7 +249,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Tanggal"
-                        android:textColor="@color/main_blue_dark" />
+                        android:textColor="@color/main_blue_dark"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/textView19"
@@ -242,7 +261,8 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text=":"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvDetailTanggal"
@@ -251,7 +271,9 @@
                         android:layout_marginBottom="6dp"
                         android:fontFamily="@font/poppins"
                         android:text="17 Agustus 2023"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textColorHint="@color/text_hint"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -266,7 +288,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Catatan"
-                        android:textColor="@color/main_blue_dark" />
+                        android:textColor="@color/main_blue_dark"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/textView20"
@@ -276,15 +299,18 @@
                         android:layout_marginRight="12dp"
                         android:fontFamily="@font/poppins"
                         android:text=":"
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvDetailCatatan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="kosong"
+                        android:hint="*catatan tidak ditambahkan"
                         android:text="Lorem ipsum dolor sit amet,  consectetur adipiscing elit, sed do it."
-                        android:textColor="@color/text_secondary" />
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp"
+                        android:textColorHint="@color/text_hint" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -146,7 +146,8 @@
                         android:id="@+id/spInputDivisi"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -183,12 +184,9 @@
                             android:drawableStart="@drawable/ic_calender"
                             android:drawablePadding="4dp"
                             android:drawableTint="@color/main_blue_light"
-                            android:ellipsize="end"
                             android:fontFamily="@font/poppins"
                             android:gravity="center_vertical"
                             android:hint="12/09/2023"
-                            android:maxLines="1"
-                            android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/text_hint"
                             android:textSize="18sp" />
