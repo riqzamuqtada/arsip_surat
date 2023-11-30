@@ -10,7 +10,7 @@ import com.kospin.myapplication.R
 import com.kospin.myapplication.database.DataAdapterSurat
 import com.kospin.myapplication.databinding.AdapterSuratBinding
 
-class SuratAdapter(private val list: ArrayList<DataAdapterSurat>) : RecyclerView.Adapter<SuratAdapter.ViewHolder>(){
+class SuratAdapter(private val list: ArrayList<DataAdapterSurat>, val listener: Onclik) : RecyclerView.Adapter<SuratAdapter.ViewHolder>(){
     class ViewHolder(private val find: AdapterSuratBinding) : RecyclerView.ViewHolder(find.root) {
         fun bind(data: DataAdapterSurat){
             find.tvAdpNomor.setText(data.no_surat)
@@ -31,6 +31,11 @@ class SuratAdapter(private val list: ArrayList<DataAdapterSurat>) : RecyclerView
             }
 
         }
+        val delete = find.btnAdpDelete
+    }
+
+    interface Onclik {
+        fun deleteSurat(id: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -45,6 +50,9 @@ class SuratAdapter(private val list: ArrayList<DataAdapterSurat>) : RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = list[position]
         holder.bind(data)
+        holder.delete.setOnClickListener {
+            listener.deleteSurat(data.id)
+        }
     }
 
     fun setData(newData: List<DataAdapterSurat>){

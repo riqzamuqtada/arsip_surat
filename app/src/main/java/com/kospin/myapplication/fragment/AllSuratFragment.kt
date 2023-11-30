@@ -5,11 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kospin.myapplication.adapter.SuratAdapter
+import com.kospin.myapplication.database.DataAdapterSurat
 import com.kospin.myapplication.database.DbArsipSurat
+import com.kospin.myapplication.databinding.AdapterSuratBinding
 import com.kospin.myapplication.databinding.FragmentAllSuratBinding
 import com.kospin.myapplication.viewModel.MyViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -55,9 +59,48 @@ class AllSuratFragment : Fragment() {
             find.tvUsername.setText(username)
         })
 
-        adapter = SuratAdapter(arrayListOf())
+        adapter = SuratAdapter(arrayListOf(), object : SuratAdapter.Onclik{
+            override fun deleteSurat(id: Int) {
+                deleteData(id)
+            }
+
+
+        })
 
         return find.root
+    }
+
+    private fun deleteData(id: Int) {
+
+        val data = db.dao().getById(id)[0]
+
+        val builder = AlertDialog.Builder(this.requireContext())
+
+        builder.setTitle("hapus data")
+        builder.setMessage("apakah anda yakin ingin menghapus surat ${data.hal}")
+
+        builder.setPositiveButton("OK") { dialog, _ ->
+            // Tindakan yang akan diambil saat tombol OK ditekan (bisa kosong jika tidak diperlukan)
+            CoroutineScope(Dispatchers.IO).launch {
+                db.dao().deleteSrt(data)
+                withContext(Dispatchers.Main){
+                    dialog.dismiss()
+                    tampilData()
+                    alert("surat berhasil dihapus")
+                }
+            }
+        }
+
+        builder.setNegativeButton("batal") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun alert(msg: String) {
+        Toast.makeText(this.requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {
