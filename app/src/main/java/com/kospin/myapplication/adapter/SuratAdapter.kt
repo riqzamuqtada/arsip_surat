@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kospin.myapplication.DetailActivity
+import com.kospin.myapplication.InputActivity
 import com.kospin.myapplication.R
 import com.kospin.myapplication.database.DataAdapterSurat
 import com.kospin.myapplication.databinding.AdapterSuratBinding
@@ -21,6 +22,11 @@ class SuratAdapter(private val list: ArrayList<DataAdapterSurat>) : RecyclerView
             find.cardAdpDetail.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(context, DetailActivity::class.java).putExtra("id", data.id)
+                context.startActivity(intent)
+            }
+            find.btnAdpUpdate.setOnClickListener {
+                val context = itemView.context
+                val intent = Intent(context, InputActivity::class.java).putExtra("id", data.id)
                 context.startActivity(intent)
             }
 

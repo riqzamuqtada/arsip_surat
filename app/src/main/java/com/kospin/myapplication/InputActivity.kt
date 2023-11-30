@@ -43,9 +43,10 @@ class InputActivity : AppCompatActivity() {
     private var currentPhotoPath: String? = null
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_IMAGE_PICK = 2
-    private var opsiDivisi : String = "0"
-    private var opsiJenis : String = "0"
+    private var opsiDivisi : Int = 0
+    private var opsiJenis : Int = 0
     private val db by lazy { DbArsipSurat.getInstance(this) }
+    private val dataDivisi = arrayOf("unit/divisi", "Pengurus", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional", "Kesekretariatan")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +60,6 @@ class InputActivity : AppCompatActivity() {
             modeUpdate(id)
         }
 
-        val dataDivisi = arrayOf("unit/divisi", "Pengurus", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional", "Kesekretariatan")
         val spnDivisi = find.spInputDivisi
         setupSpinner(spnDivisi, dataDivisi, opsiDivisi)
         spnDivisi.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -125,11 +125,42 @@ class InputActivity : AppCompatActivity() {
             }
         }
 
+        find.btnInputUpdate.setOnClickListener {
+            if (
+                find.etInputNomor.text.isNotEmpty() &&
+                find.etInputHal.text.isNotEmpty() &&
+                find.tvInputTanggal.text.isNotEmpty() &&
+                selectedItemJenis !== "pilih jenis" &&
+                selectedItemDivisi !== "unit/divisi" &&
+                foto.isNotEmpty()
+            ){
+                try {
+                    updateSurat(id)
+                } catch (e:Exception){
+                    alert("Error : $e")
+                }
+            } else {
+                alert("Wajib di isi")
+            }
+        }
+
     }
 
     private fun modeUpdate(id: Int) {
+        val data = db.dao().getById(id)[0]
+
         find.btnInputInsert.visibility = View.GONE
         find.tvFormTitle.setText("Update Arsip Surat")
+        find.etInputNomor.setText(data.no_surat)
+        find.etInputHal.setText(data.hal)
+        find.tvInputTanggal.setText(data.tanggal)
+        find.tvInputFoto.setHint("Ubah Foto")
+        find.etInputCatatan.setText(data.catatan)
+
+        opsiJenis = if(data.jenis == "Masuk") 1 else 2
+        opsiDivisi = dataDivisi.indexOf(data.divisi)
+        foto = data.gambar
+
     }
 
     private fun modeTambah() {
@@ -156,16 +187,37 @@ class InputActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateSurat(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            db.dao().updateSrt(
+                Surat(
+                    id,
+                    find.etInputNomor.text.toString(),
+                    find.etInputHal.text.toString(),
+                    selectedItemJenis,
+                    selectedItemDivisi,
+                    find.tvInputTanggal.text.toString(),
+                    find.etInputCatatan.text.toString(),
+                    foto
+                )
+            )
+            withContext(Dispatchers.Main){
+                alert("Berhasil mengupdate")
+                onBackPressed()
+            }
+        }
+    }
+
     private fun alert(msg: String){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    private fun setupSpinner(spinner: Spinner, data: Array<String>, opsi: String){
+    private fun setupSpinner(spinner: Spinner, data: Array<String>, opsi: Int){
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        spinner.setSelection(opsi.toInt())
+        spinner.setSelection(opsi)
     }
 
     private fun showOptionsDialog() {
