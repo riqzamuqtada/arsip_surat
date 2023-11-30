@@ -321,7 +321,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
+            android:id="@+id/lyDetailHeader"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:background="#1E1E1E "
@@ -364,7 +364,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+            app:layout_constraintTop_toBottomOf="@+id/lyDetailHeader">
 
             <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/imgPhotoView"

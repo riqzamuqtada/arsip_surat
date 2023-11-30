@@ -21,6 +21,7 @@ class DetailActivity : AppCompatActivity() {
         val data = db.dao().getById(id)[0]
         val bitmap = BitmapFactory.decodeByteArray(data.gambar, 0, data.gambar.size)
 
+//        set data
         find.imgDetailSurat.setImageBitmap(bitmap)
         find.tvDetailNomor.setText(data.no_surat)
         find.tvDetailHal.setText(data.hal)
@@ -31,6 +32,7 @@ class DetailActivity : AppCompatActivity() {
         find.imgPhotoView.setImageBitmap(bitmap)
         find.tvZoomHal.setText(data.hal)
 
+//        fungsi button
         find.btnDetailBack.setOnClickListener {
             onBackPressed()
         }
