@@ -1,6 +1,8 @@
 package com.kospin.myapplication.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,6 +55,11 @@ class AllSuratFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _find = FragmentAllSuratBinding.inflate(inflater, container, false)
+        return find.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         adapter = SuratAdapter(arrayListOf(), object : SuratAdapter.Onclik{
             override fun deleteSurat(id: Int) {
@@ -60,14 +67,31 @@ class AllSuratFragment : Fragment() {
             }
         })
 
-        return find.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         viewModel.username.observe(viewLifecycleOwner, Observer { username ->
             find.tvUsername.setText(username)
+        })
+
+        find.etSearch.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun afterTextChanged(s: Editable?) { }
+            override fun onTextChanged(key: CharSequence?, start: Int, before: Int, count: Int) {
+                if (key.isNullOrEmpty()){
+                    tampilData()
+                } else {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val data = db.dao().cariSurat("%$key%")
+                        adapter.setData(data)
+                        withContext(Dispatchers.Main){
+                            adapter.notifyDataSetChanged()
+                            if (data.isEmpty()){
+                                find.tvNotifikasi.visibility = View.VISIBLE
+                            } else {
+                                find.tvNotifikasi.visibility = View.GONE
+                            }
+                        }
+                    }
+                }
+            }
         })
 
     }
@@ -122,6 +146,7 @@ class AllSuratFragment : Fragment() {
             adapter.setData(data)
             withContext(Dispatchers.Main){
                 adapter.notifyDataSetChanged()
+                find.tvNotifikasi.visibility = View.GONE
             }
         }
         find.rvArsipSurat.adapter = adapter

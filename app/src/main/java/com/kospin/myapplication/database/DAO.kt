@@ -20,4 +20,6 @@ interface DAO {
     fun deleteSrt(surat: Surat)
     @Query("SELECT * FROM tb_surat WHERE id = :id")
     fun getById(id: Int) : List<Surat>
+    @Query("SELECT id, no_surat, hal, jenis, divisi, tanggal FROM tb_surat WHERE no_surat LIKE :key OR hal LIKE :key")
+    fun cariSurat(key: String) : List<DataAdapterSurat>
 }
