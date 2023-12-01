@@ -23,7 +23,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class SuratMasukFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private lateinit var find: FragmentSuratMasukBinding
+    private var _find: FragmentSuratMasukBinding? = null
+    private val find get() = _find!!
     private var param1: String? = null
     private var param2: String? = null
     private val viewModel: MyViewModel by activityViewModels()
@@ -41,13 +42,23 @@ class SuratMasukFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        find = FragmentSuratMasukBinding.inflate(layoutInflater)
+        _find = FragmentSuratMasukBinding.inflate(inflater, container, false)
+
+        return find.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel.username.observe(viewLifecycleOwner, Observer { username ->
             find.tvUsername.setText(username)
         })
 
-        return find.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _find = null
     }
 
     companion object {

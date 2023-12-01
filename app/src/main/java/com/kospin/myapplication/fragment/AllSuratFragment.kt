@@ -11,9 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kospin.myapplication.adapter.SuratAdapter
-import com.kospin.myapplication.database.DataAdapterSurat
 import com.kospin.myapplication.database.DbArsipSurat
-import com.kospin.myapplication.databinding.AdapterSuratBinding
 import com.kospin.myapplication.databinding.FragmentAllSuratBinding
 import com.kospin.myapplication.viewModel.MyViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +31,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class AllSuratFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private lateinit var find: FragmentAllSuratBinding
+    private var _find: FragmentAllSuratBinding? = null
+    private val find get() = _find!!
     private lateinit var adapter: SuratAdapter
     private var param1: String? = null
     private var param2: String? = null
@@ -53,21 +52,29 @@ class AllSuratFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        find = FragmentAllSuratBinding.inflate(layoutInflater)
-
-        viewModel.username.observe(viewLifecycleOwner, Observer { username ->
-            find.tvUsername.setText(username)
-        })
+        _find = FragmentAllSuratBinding.inflate(inflater, container, false)
 
         adapter = SuratAdapter(arrayListOf(), object : SuratAdapter.Onclik{
             override fun deleteSurat(id: Int) {
                 deleteData(id)
             }
-
-
         })
 
         return find.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.username.observe(viewLifecycleOwner, Observer { username ->
+            find.tvUsername.setText(username)
+        })
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _find = null
     }
 
     private fun deleteData(id: Int) {

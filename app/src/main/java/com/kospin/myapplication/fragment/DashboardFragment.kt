@@ -27,7 +27,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class DashboardFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private lateinit var find: FragmentDashboardBinding
+    private var _find: FragmentDashboardBinding? = null
+    private val find get() = _find!!
     private val myViewModel: MyViewModel by activityViewModels()
     private var param1: String? = null
     private var param2: String? = null
@@ -45,13 +46,23 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        find = FragmentDashboardBinding.inflate(layoutInflater)
+        _find = FragmentDashboardBinding.inflate(inflater, container, false)
+
+        return find.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         myViewModel.username.observe(viewLifecycleOwner, Observer { username ->
             find.tvDashboardUsername.setText(username.toString())
         })
 
-        return find.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _find = null
     }
 
     companion object {
