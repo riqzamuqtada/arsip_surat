@@ -12,8 +12,8 @@
     <item
         android:id="@+id/inputActivity"
         android:title="Tambah"
-        android:icon="@drawable/ic_nav_tambah"
-        android:iconTint="@color/main_blue_dark"/>
+        android:icon="@drawable/ic_plus_shape_solid"
+        android:iconTint="@color/main_orange"/>
     <item
         android:id="@+id/suratMasukFragment"
         android:title="Surat Masuk"
