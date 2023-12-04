@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -83,7 +82,8 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="@drawable/ip_nav_surat"
-            android:dropDownWidth="wrap_content" />
+            android:dropDownWidth="wrap_content"
+            android:minHeight="36dp" />
 
         <LinearLayout
             android:id="@+id/ipFilterTanggal"
@@ -121,7 +121,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/ip_nav_surat"
-                android:src="@drawable/ic_cancel" />
+                android:src="@drawable/ic_cancel"
+                android:visibility="gone" />
 
 
         </LinearLayout>
@@ -151,7 +152,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        tools:listitem="@layout/adapter_surat" >
+        tools:listitem="@layout/adapter_surat">
 
     </androidx.recyclerview.widget.RecyclerView>
 
