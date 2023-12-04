@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kospin.myapplication.adapter.SuratAdapter
 import com.kospin.myapplication.database.DbArsipSurat
@@ -55,6 +58,7 @@ class AllSuratFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _find = FragmentAllSuratBinding.inflate(inflater, container, false)
+        if (isResumed) find.etSearch.text.clear()
         return find.root
     }
 
@@ -94,6 +98,19 @@ class AllSuratFragment : Fragment() {
             }
         })
 
+        val dataDivisi = arrayOf("unit/divisi", "Pengurus", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional", "Kesekretariatan")
+        val spnFilterDivisi = find.spnFilterDivisi
+        val spnAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, dataDivisi)
+        spnFilterDivisi.adapter = spnAdapter
+
+
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        find.etSearch.text.clear()
+        find.spnFilterDivisi.setSelection(0)
     }
 
     override fun onDestroyView() {
@@ -104,7 +121,6 @@ class AllSuratFragment : Fragment() {
     private fun deleteData(id: Int) {
 
         val data = db.dao().getById(id)[0]
-
         val builder = AlertDialog.Builder(this.requireContext())
 
         builder.setTitle("hapus data")
