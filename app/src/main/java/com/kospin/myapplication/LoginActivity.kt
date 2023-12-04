@@ -37,12 +37,12 @@ class LoginActivity : AppCompatActivity() {
                             .putExtra("username", inputUsername.text.toString())
                     )
                     finish()
-                    alert("Hello ${inputUsername.text}")
+                    alert("Selamat Datang ${inputUsername.text}!")
                 } else{
-                    alert("Username dan Password salah")
+                    alert("Username dan Password salah!")
                 }
             } else {
-                alert("Username dan Password tidak boleh kosong")
+                alert("Username dan Password tidak boleh Kosong!")
             }
         }
 

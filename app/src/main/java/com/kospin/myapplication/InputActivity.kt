@@ -77,6 +77,7 @@ class InputActivity : AppCompatActivity() {
         val dataJenis = arrayOf("pilih jenis", "Masuk", "Keluar")
         val spnJenis = find.spInputJenis
         setupSpinner(spnJenis, dataJenis,  opsiJenis)
+
         spnJenis.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -121,7 +122,7 @@ class InputActivity : AppCompatActivity() {
                     alert("Error : $e")
                 }
             } else {
-                alert("Wajib di isi")
+                alert("Lengkapi data yang diperlukan terlebih dahulu!")
             }
         }
 
@@ -140,7 +141,7 @@ class InputActivity : AppCompatActivity() {
                     alert("Error : $e")
                 }
             } else {
-                alert("Wajib di isi")
+                alert("Lengkapi data yang diperlukan terlebih dahulu!")
             }
         }
 
@@ -181,7 +182,7 @@ class InputActivity : AppCompatActivity() {
                 foto
             ))
             withContext(Dispatchers.Main){
-                alert("Data berhasil ditambahkan")
+                alert("Data Arsip Surat berhasil ditambahkan!")
                 onBackPressed()
             }
         }
@@ -202,7 +203,7 @@ class InputActivity : AppCompatActivity() {
                 )
             )
             withContext(Dispatchers.Main){
-                alert("Berhasil mengupdate")
+                alert("Data Arsip Surat berhasil diubah!")
                 onBackPressed()
             }
         }

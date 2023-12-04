@@ -11,10 +11,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kospin.myapplication.R
 import com.kospin.myapplication.adapter.SuratAdapter
 import com.kospin.myapplication.database.DbArsipSurat
 import com.kospin.myapplication.databinding.FragmentAllSuratBinding
@@ -101,9 +103,8 @@ class AllSuratFragment : Fragment() {
         val dataDivisi = arrayOf("unit/divisi", "Pengurus", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional", "Kesekretariatan")
         val spnFilterDivisi = find.spnFilterDivisi
         val spnAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, dataDivisi)
+        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spnFilterDivisi.adapter = spnAdapter
-
-
 
     }
 
@@ -123,26 +124,33 @@ class AllSuratFragment : Fragment() {
         val data = db.dao().getById(id)[0]
         val builder = AlertDialog.Builder(this.requireContext())
 
-        builder.setTitle("hapus data")
-        builder.setMessage("apakah anda yakin ingin menghapus surat ${data.hal}")
+        builder.setTitle("Hapus Arsip Surat")
+        builder.setMessage("Apakah anda yakin ingin menghapus\n\"${data.hal}\" ?")
 
-        builder.setPositiveButton("OK") { dialog, _ ->
+        builder.setPositiveButton("Hapus") { dialog, _ ->
             // Tindakan yang akan diambil saat tombol OK ditekan (bisa kosong jika tidak diperlukan)
             CoroutineScope(Dispatchers.IO).launch {
                 db.dao().deleteSrt(data)
                 withContext(Dispatchers.Main){
                     dialog.dismiss()
                     tampilData()
-                    alert("surat berhasil dihapus")
+                    alert("Data Arsip Surat berhasil dihapus!")
                 }
             }
         }
 
-        builder.setNegativeButton("batal") { dialog, _ ->
+        builder.setNegativeButton("Batal") { dialog, _ ->
             dialog.dismiss()
         }
 
         val dialog = builder.create()
+
+        // Ambil tombol positif setelah dialog ditampilkan
+        dialog.setOnShowListener {
+            val positiveButton = (dialog as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE)
+            positiveButton.setTextColor(ContextCompat.getColor(this.requireContext(), R.color.clr_red))
+        }
+
         dialog.show()
     }
 
