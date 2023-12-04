@@ -114,6 +114,7 @@
         android:layout_height="match_parent"
         android:background="#80000000"
         android:elevation="40dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

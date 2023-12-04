@@ -146,8 +146,7 @@
                         android:id="@+id/spInputDivisi"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black" />
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
             </LinearLayout>

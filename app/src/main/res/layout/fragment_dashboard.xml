@@ -54,4 +54,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="261dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
