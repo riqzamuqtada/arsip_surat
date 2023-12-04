@@ -86,6 +86,7 @@
             android:dropDownWidth="wrap_content" />
 
         <LinearLayout
+            android:id="@+id/ipFilterTanggal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="6dp"
@@ -95,19 +96,20 @@
             android:paddingEnd="4dp">
 
             <HorizontalScrollView
+                android:id="@+id/hsvFilterTanggal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <EditText
-                    android:id="@+id/etFilterTanggal"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tvFilterTanggal"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ip_nav_surat"
                     android:fontFamily="@font/poppins"
+                    android:gravity="center_vertical"
                     android:hint="Pilih Tanggal"
-                    android:inputType="text"
-                    android:paddingHorizontal="12dp"
+                    android:paddingStart="12dp"
                     android:textColor="@color/main_blue_dark"
                     android:textColorHint="@color/text_hint"
                     android:textSize="16sp" />
