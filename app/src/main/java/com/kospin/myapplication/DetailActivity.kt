@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.kospin.myapplication.database.DbArsipSurat
 import com.kospin.myapplication.databinding.ActivityDetailBinding
 
@@ -16,6 +17,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         find = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(find.root)
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.main_blue_dark))
 
         val id = intent.getIntExtra("id", -1)
         val data = db.dao().getById(id)[0]

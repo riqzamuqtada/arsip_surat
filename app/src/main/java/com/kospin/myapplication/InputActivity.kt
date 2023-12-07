@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.ExifInterface
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.github.chrisbanes.photoview.BuildConfig
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -52,6 +54,8 @@ class InputActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         find = ActivityInputBinding.inflate(layoutInflater)
         setContentView(find.root)
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.main_blue_dark))
 
         val id: Int = intent.getIntExtra("id",-1)
         if (id == -1){

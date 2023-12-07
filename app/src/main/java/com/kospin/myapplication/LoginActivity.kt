@@ -21,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
         find = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(find.root)
 
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.main_blue_dark))
+
         val username = "admin"
         val password = "kospin123"
         val inputUsername = find.etUsername

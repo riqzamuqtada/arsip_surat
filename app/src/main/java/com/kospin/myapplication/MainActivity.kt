@@ -1,9 +1,11 @@
 package com.kospin.myapplication
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -21,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         find = ActivityMainBinding.inflate(layoutInflater)
         setContentView(find.root)
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.main_blue_light))
 
         val navCtrl = this.findNavController(R.id.navhost_fragment)
         NavigationUI.setupWithNavController(find.bottomNavigationView, navCtrl)
