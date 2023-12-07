@@ -4,10 +4,9 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kospin.myapplication.DetailActivity
-import com.kospin.myapplication.InputActivity
+import com.kospin.myapplication.model.DetailActivity
+import com.kospin.myapplication.model.InputActivity
 import com.kospin.myapplication.R
-import com.kospin.myapplication.database.DataAdapterSurat
 import com.kospin.myapplication.databinding.AdapterSuratBinding
 
 class SuratAdapter(private val list: ArrayList<DataAdapterSurat>, val listener: Onclik) : RecyclerView.Adapter<SuratAdapter.ViewHolder>(){
@@ -18,7 +17,7 @@ class SuratAdapter(private val list: ArrayList<DataAdapterSurat>, val listener: 
             find.tvAdpDivisi.setText(data.divisi)
             find.tvAdpTanggal.setText(data.tanggal)
             find.tvAdpStatus.setText(data.jenis)
-            if (data.jenis == "Keluar") find.lbAdpStatus.setBackgroundResource(R.drawable.lb_adp_status_keluar)
+            if (data.jenis == "Keluar") find.lbAdpStatus.setBackgroundResource(R.drawable.lb_adp_status_keluar) else find.lbAdpStatus.setBackgroundResource(R.drawable.lb_adp_status_masuk)
             find.cardAdpDetail.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(context, DetailActivity::class.java).putExtra("id", data.id)

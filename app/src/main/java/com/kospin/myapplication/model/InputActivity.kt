@@ -1,4 +1,4 @@
-package com.kospin.myapplication
+package com.kospin.myapplication.model
 
 import android.app.Activity
 import android.content.Context
@@ -20,11 +20,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProviders
 import com.github.chrisbanes.photoview.BuildConfig
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.kospin.myapplication.database.DbArsipSurat
-import com.kospin.myapplication.database.Surat
+import com.kospin.myapplication.R
+import com.kospin.myapplication.roomdb.DbArsipSurat
+import com.kospin.myapplication.roomdb.Surat
 import com.kospin.myapplication.databinding.ActivityInputBinding
+import com.kospin.myapplication.utils.DatePicker
+import com.kospin.myapplication.viewmodel.SuratRepository
+import com.kospin.myapplication.viewmodel.SuratViewModel
+import com.kospin.myapplication.viewmodel.SuratViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,7 +53,6 @@ class InputActivity : AppCompatActivity() {
     private var opsiDivisi : Int = 0
     private var opsiJenis : Int = 0
     private val db by lazy { DbArsipSurat.getInstance(this) }
-    private val dataDivisi = arrayOf("unit/divisi", "Pengurus", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional", "Kesekretariatan")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +68,12 @@ class InputActivity : AppCompatActivity() {
             modeUpdate(id)
         }
 
+        find.btnInputBack.setOnClickListener {
+            onBackPressed()
+        }
+
         val spnDivisi = find.spInputDivisi
-        setupSpinner(spnDivisi, dataDivisi, opsiDivisi)
+        setupSpinner(spnDivisi, viewModel().divisi, opsiDivisi)
         spnDivisi.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -94,18 +102,11 @@ class InputActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
         find.tvInputTanggal.setOnClickListener {
-            val builder = MaterialDatePicker.Builder.datePicker()
-            val picker = builder.build()
-
-            picker.addOnPositiveButtonClickListener { selection ->
-                val dateFormat = SimpleDateFormat("dd/MMMM/yyyy", Locale("id", "ID"))
-                val selectedDate = dateFormat.format(selection)
-                val date = selectedDate.replace("/", " ")
-
-                find.tvInputTanggal.setText(date)
+            val datePicker = DatePicker()
+            datePicker.setOnDateSetListener { selectedDate ->
+                find.tvInputTanggal.setText(selectedDate)
             }
-
-            picker.show(supportFragmentManager, picker.toString())
+            datePicker.show(supportFragmentManager, "datePicker")
         }
         find.tvInputFoto.setOnClickListener {
             showOptionsDialog()
@@ -152,7 +153,7 @@ class InputActivity : AppCompatActivity() {
     }
 
     private fun modeUpdate(id: Int) {
-        val data = db.dao().getById(id)[0]
+        val data = db.dao().getById(id)
 
         find.btnInputInsert.visibility = View.GONE
         find.tvFormTitle.setText("Update Arsip Surat")
@@ -163,9 +164,15 @@ class InputActivity : AppCompatActivity() {
         find.etInputCatatan.setText(data.catatan)
 
         opsiJenis = if(data.jenis == "Masuk") 1 else 2
-        opsiDivisi = dataDivisi.indexOf(data.divisi)
+        opsiDivisi = viewModel().divisi.indexOf(data.divisi)
         foto = data.gambar
 
+    }
+
+    private fun viewModel(): SuratViewModel {
+        val repository = SuratRepository(db)
+        val factory = SuratViewModelFactory(repository)
+        return ViewModelProviders.of(this, factory).get(SuratViewModel::class.java)
     }
 
     private fun modeTambah() {

@@ -1,11 +1,12 @@
-package com.kospin.myapplication
+package com.kospin.myapplication.model
 
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.kospin.myapplication.database.DbArsipSurat
+import com.kospin.myapplication.R
+import com.kospin.myapplication.roomdb.DbArsipSurat
 import com.kospin.myapplication.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.main_blue_dark))
 
         val id = intent.getIntExtra("id", -1)
-        val data = db.dao().getById(id)[0]
+        val data = db.dao().getById(id)
         val bitmap = BitmapFactory.decodeByteArray(data.gambar, 0, data.gambar.size)
 
 //        set data

@@ -1,5 +1,6 @@
-package com.kospin.myapplication
+package com.kospin.myapplication.model
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -8,12 +9,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.kospin.myapplication.MainActivity
+import com.kospin.myapplication.R
 import com.kospin.myapplication.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var find : ActivityLoginBinding
-//    private lateinit var myViewModel : MyViewModel
     private val REQUEST_CODE_STORAGE_PERMISSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +36,9 @@ class LoginActivity : AppCompatActivity() {
         find.btnLogin.setOnClickListener {
             if (inputUsername.text.isNotEmpty() && inputPassword.text.isNotEmpty()){
                 if (inputPassword.text.toString() == password){
-                    startActivity(
-                        Intent(this, MainActivity::class.java)
-                            .putExtra("username", inputUsername.text.toString())
-                    )
+                    startActivity(Intent(this, MainActivity::class.java))
+                    val sheredPreferences = getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
+                    sheredPreferences.edit().putString("username", inputUsername.text.toString()).apply()
                     finish()
                     alert("Selamat Datang ${inputUsername.text}!")
                 } else{

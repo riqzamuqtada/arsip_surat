@@ -1,4 +1,4 @@
-package com.kospin.myapplication.database
+package com.kospin.myapplication.adapter
 
 data class DataAdapterSurat(
     val id          : Int,

@@ -1,4 +1,4 @@
-package com.kospin.myapplication.database
+package com.kospin.myapplication.roomdb
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

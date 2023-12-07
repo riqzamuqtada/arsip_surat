@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.kospin.myapplication.fragment.DashboardFragment"
+        android:name="com.kospin.myapplication.model.mainmodel.fragment.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/allSuratFragment"
-        android:name="com.kospin.myapplication.fragment.AllSuratFragment"
+        android:name="com.kospin.myapplication.model.mainmodel.fragment.AllSuratFragment"
         android:label="fragment_all_surat"
         tools:layout="@layout/fragment_all_surat" />
     <fragment
         android:id="@+id/suratMasukFragment"
-        android:name="com.kospin.myapplication.fragment.SuratMasukFragment"
+        android:name="com.kospin.myapplication.model.mainmodel.fragment.SuratMasukFragment"
         android:label="fragment_surat_masuk"
         tools:layout="@layout/fragment_surat_masuk" />
     <fragment
         android:id="@+id/suratKeluarFragment"
-        android:name="com.kospin.myapplication.fragment.SuratKeluarFragment"
+        android:name="com.kospin.myapplication.model.mainmodel.fragment.SuratKeluarFragment"
         android:label="fragment_surat_keluar"
         tools:layout="@layout/fragment_surat_keluar" />
     <activity
         android:id="@+id/inputActivity"
-        android:name="com.kospin.myapplication.InputActivity"
+        android:name="com.kospin.myapplication.model.InputActivity"
         android:label="activity_input"
         tools:layout="@layout/activity_input" />
 </navigation>
