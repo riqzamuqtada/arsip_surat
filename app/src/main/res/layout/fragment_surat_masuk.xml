@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_white_light"
-    tools:context=".model.mainmodel.fragment.SuratMasukFragment">
+    tools:context=".model.fragment.SuratMasukFragment">
 
     <TextView
         android:id="@+id/tvUsername"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvUsername" />
 
     <EditText
-        android:id="@+id/etSearch"
+        android:id="@+id/etSearchMasuk"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -84,10 +84,10 @@
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/etSearch"
+        app:layout_constraintEnd_toEndOf="@+id/etSearchMasuk"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etSearch"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch">
+        app:layout_constraintStart_toStartOf="@+id/etSearchMasuk"
+        app:layout_constraintTop_toBottomOf="@+id/etSearchMasuk">
 
         <Spinner
             android:id="@+id/spnFilterDivisi"
@@ -130,7 +130,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvArsipSurat"
+        android:id="@+id/rvArsipSuratMasuk"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingHorizontal="16dp"
@@ -139,5 +139,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:listitem="@layout/adapter_surat" />
+
+    <TextView
+        android:id="@+id/tvNotifikasiSrtMasuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Data tidak ditemukan"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

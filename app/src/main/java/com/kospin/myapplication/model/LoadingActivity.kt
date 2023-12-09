@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.core.content.ContextCompat
-import com.kospin.myapplication.fragment.DashboardFragment
+import com.kospin.myapplication.model.LoginActivity
 
 class LoadingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +16,7 @@ class LoadingActivity : AppCompatActivity() {
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.main_blue_dark))
 
         Handler().postDelayed({
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, 3000)
 

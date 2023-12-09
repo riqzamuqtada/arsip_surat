@@ -4,27 +4,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kospin.myapplication.roomdb.Surat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
 
-
-//    username
-    private var _username = MutableLiveData<String>()
-    val username: LiveData<String>
-        get() = _username
-    fun setUser(setUsername: String){
-        _username.value = setUsername
-    }
+    private val corouTine = CoroutineScope(Dispatchers.Main)
 
 //    data divisi
     val divisi: Array<String> = arrayOf("unit/divisi", "Pengurus", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional", "Kesekretariatan")
 
-    fun deleteSrt(surat: Surat) = repository.deleteSrt(surat)
+//    edit data surat
+    fun insertSrt(surat: Surat) = corouTine.launch { repository.insertSrt(surat) }
+    fun updateSrt(surat: Surat) = corouTine.launch { repository.updateSrt(surat) }
+    fun deleteSrt(surat: Surat) = corouTine.launch { repository.deleteSrt(surat) }
+
+//    get data surat
     fun getAllSurat() = repository.getAllSurat()
+    fun getJenisSrtNoFoto(jenis: String) = repository.getJenisSrtNoFoto(jenis)
+    fun getById(id: Int) = repository.getById(id)
     fun cariSurat(key: String) = repository.cariSurat(key)
     fun getByTanggal(tanggal: String) = repository.getByTanggal(tanggal)
-    fun getFiltered(divisi: String, tanggal: String) = repository.getFiltered(divisi, tanggal)
     fun getByDivisi(divisi: String) = repository.getByDivisi(divisi)
-    fun getById(id: Int) = repository.getById(id)
+    fun getFiltered(divisi: String, tanggal: String) = repository.getFiltered(divisi, tanggal)
+    fun cariSuratWithJenis(key: String, jenis: String) = repository.cariSuratWithJenis(key, jenis)
 
 }

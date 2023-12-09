@@ -12,12 +12,21 @@ import com.kospin.myapplication.databinding.AdapterSuratBinding
 class SuratAdapter(private val list: ArrayList<DataAdapterSurat>, val listener: Onclik) : RecyclerView.Adapter<SuratAdapter.ViewHolder>(){
     class ViewHolder(private val find: AdapterSuratBinding) : RecyclerView.ViewHolder(find.root) {
         fun bind(data: DataAdapterSurat){
+
             find.tvAdpNomor.setText(data.no_surat)
             find.tvAdpHal.setText(data.hal)
             find.tvAdpDivisi.setText(data.divisi)
             find.tvAdpTanggal.setText(data.tanggal)
             find.tvAdpStatus.setText(data.jenis)
-            if (data.jenis == "Keluar") find.lbAdpStatus.setBackgroundResource(R.drawable.lb_adp_status_keluar) else find.lbAdpStatus.setBackgroundResource(R.drawable.lb_adp_status_masuk)
+
+            if (data.jenis == "Keluar") {
+                find.lbAdpStatus.setBackgroundResource(R.drawable.lb_adp_status_keluar)
+                find.lbAdpDivisi.setText("Ke")
+            } else {
+                find.lbAdpStatus.setBackgroundResource(R.drawable.lb_adp_status_masuk)
+                find.lbAdpDivisi.setText("Dari")
+            }
+
             find.cardAdpDetail.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(context, DetailActivity::class.java).putExtra("id", data.id)
@@ -57,5 +66,7 @@ class SuratAdapter(private val list: ArrayList<DataAdapterSurat>, val listener: 
     fun setData(newData: List<DataAdapterSurat>){
         list.clear()
         list.addAll(newData)
+        notifyDataSetChanged()
     }
+
 }

@@ -6,12 +6,12 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.kospin.myapplication.MainActivity
 import com.kospin.myapplication.R
 import com.kospin.myapplication.databinding.ActivityLoginBinding
+import com.kospin.myapplication.utils.PublicFunction
 
 class LoginActivity : AppCompatActivity() {
 
@@ -40,19 +40,15 @@ class LoginActivity : AppCompatActivity() {
                     val sheredPreferences = getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
                     sheredPreferences.edit().putString("username", inputUsername.text.toString()).apply()
                     finish()
-                    alert("Selamat Datang ${inputUsername.text}!")
+                    PublicFunction.alert("Selamat Datang ${inputUsername.text}!", this)
                 } else{
-                    alert("Username dan Password salah!")
+                    PublicFunction.alert("Username dan Password salah!", this)
                 }
             } else {
-                alert("Username dan Password tidak boleh Kosong!")
+                PublicFunction.alert("Username dan Password tidak boleh Kosong!", this)
             }
         }
 
-    }
-
-    private fun alert(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     // Metode untuk memeriksa dan meminta izin

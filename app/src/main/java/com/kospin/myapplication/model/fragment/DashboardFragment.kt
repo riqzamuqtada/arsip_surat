@@ -1,4 +1,4 @@
-package com.kospin.myapplication.model.mainmodel.fragment
+package com.kospin.myapplication.model.fragment
 
 import android.content.Context
 import android.content.Intent
