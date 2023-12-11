@@ -1,6 +1,5 @@
 package com.kospin.myapplication.model.fragment
 
-import android.R
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -9,10 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kospin.myapplication.adapter.DataAdapterSurat
@@ -55,7 +52,6 @@ class SuratMasukFragment : Fragment() {
 
 //        search
         find.etSearchMasuk.addTextChangedListener(object : TextWatcher{
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun afterTextChanged(s: Editable?) { }
             override fun onTextChanged(key: CharSequence?, start: Int, before: Int, count: Int) {
@@ -65,7 +61,6 @@ class SuratMasukFragment : Fragment() {
                     setSearch(key)
                 }
             }
-
         })
 
 //        filter
@@ -85,22 +80,21 @@ class SuratMasukFragment : Fragment() {
         }
 
         find.tvFilterTanggalMasuk.addTextChangedListener(object : TextWatcher {
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun afterTextChanged(s: Editable?) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 selectedTgl = find.tvFilterTanggalMasuk.text.toString()
                 filter()
             }
-
         })
 
 //          divisi
         val spnFilterDivisi = find.spnFilterDivisiMasuk
-        val spnAdapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_dropdown_item, viewModel().divisi)
+        val spnAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, viewModel().divisi)
         spnFilterDivisi.adapter = spnAdapter
 
         spnFilterDivisi.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) { }
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -111,9 +105,6 @@ class SuratMasukFragment : Fragment() {
                 selectedTgl = find.tvFilterTanggalMasuk.text.toString()
                 filter()
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) { }
-
         }
 
     }
@@ -161,31 +152,6 @@ class SuratMasukFragment : Fragment() {
         } else {
             find.tvNotifikasiSrtMasuk.visibility = View.GONE
         }
-    }
-
-    private fun deleteData(id: Int) {
-
-        val data = viewModel().getById(id)
-        val builder = AlertDialog.Builder(requireContext())
-
-        builder.setTitle("hapus data")
-        builder.setMessage("apakah anda yakin ingin menghapus surat ${data.hal}")
-
-        builder.setPositiveButton("OK") { dialog, _ ->
-            // Tindakan yang akan diambil saat tombol OK ditekan (bisa kosong jika tidak diperlukan)
-            viewModel().deleteSrt(data)
-            dialog.dismiss()
-            tampilData()
-            PublicFunction.alert("surat berhasil dihapus", requireContext())
-        }
-
-        builder.setNegativeButton("batal") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        val dialog = builder.create()
-        dialog.show()
-
     }
 
     private fun tampilData() {

@@ -58,7 +58,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvUsername" />
 
     <EditText
-        android:id="@+id/etSearch"
+        android:id="@+id/etSearchKeluar"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -84,34 +84,66 @@
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/etSearch"
+        app:layout_constraintEnd_toEndOf="@+id/etSearchKeluar"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etSearch"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch">
+        app:layout_constraintStart_toStartOf="@+id/etSearchKeluar"
+        app:layout_constraintTop_toBottomOf="@+id/etSearchKeluar">
 
-        <Spinner
-            android:id="@+id/spnFilterDivisi"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
-            android:background="@drawable/ip_nav_surat" />
+            app:cardCornerRadius="8dp">
 
-        <EditText
-            android:id="@+id/etFilterTanggal"
+            <Spinner
+                android:id="@+id/spnFilterDivisiKeluar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/ipFilterTanggal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="6dp"
             android:layout_weight="1"
             android:background="@drawable/ip_nav_surat"
-            android:ems="10"
-            android:fontFamily="@font/poppins"
-            android:hint="Pilih Tanggal"
-            android:inputType="text"
-            android:paddingHorizontal="12dp"
-            android:textColor="@color/main_blue_dark"
-            android:textColorHint="@color/text_hint"
-            android:textSize="16sp" />
+            android:orientation="horizontal"
+            android:paddingEnd="4dp">
+
+            <HorizontalScrollView
+                android:id="@+id/hsvFilterTanggal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tvFilterTanggalKeluar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ip_nav_surat"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_vertical"
+                    android:hint="Pilih Tanggal"
+                    android:paddingStart="12dp"
+                    android:textColor="@color/main_blue_dark"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="16sp" />
+            </HorizontalScrollView>
+
+            <ImageButton
+                android:id="@+id/btnFltTanggalCancelKeluar"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ip_nav_surat"
+                android:src="@drawable/ic_cancel"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -130,7 +162,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvArsipSurat"
+        android:id="@+id/rvArsipSuratKeluar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingHorizontal="16dp"
@@ -139,5 +171,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:listitem="@layout/adapter_surat" />
+
+    <TextView
+        android:id="@+id/tvNotifikasiSrtKeluar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Data tidak ditemukan"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

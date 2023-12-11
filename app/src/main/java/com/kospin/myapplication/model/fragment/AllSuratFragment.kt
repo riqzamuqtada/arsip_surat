@@ -115,6 +115,7 @@ class AllSuratFragment : Fragment() {
         super.onPause()
         find.etSearch.text.clear()
         find.tvFilterTanggal.text = null
+        find.btnFltTanggalCancel.visibility = View.GONE
         find.spnFilterDivisi.setSelection(0)
     }
 
