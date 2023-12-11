@@ -16,5 +16,8 @@ class SuratRepository(private val db: DbArsipSurat) {
     fun getByDivisi(divisi: String) = db.dao().getByDivisi(divisi)
     fun getFiltered(divisi: String, tanggal: String) = db.dao().getFiltered(divisi, tanggal)
     fun cariSuratWithJenis(key: String, jenis: String) = db.dao().cariSuratWithJenis(key, jenis)
+    fun getByDivisiWithJenis(divisi: String, jenis: String) = db.dao().getByDivisiWithJenis(divisi, jenis)
+    fun getByTanggalWithJenis(tanggal: String, jenis: String) = db.dao().getByTanggalWithJenis(tanggal, jenis)
+    fun getFilteredWithJenis(divisi: String, tanggal: String, jenis: String) = db.dao().getFilteredWithJenis(divisi, tanggal, jenis)
 
 }

@@ -203,10 +203,8 @@ class InputActivity : AppCompatActivity() {
     }
 
     private fun setupSpinner(spinner: Spinner, data: Array<String>, opsi: Int){
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, data)
         spinner.adapter = adapter
-
         spinner.setSelection(opsi)
     }
 

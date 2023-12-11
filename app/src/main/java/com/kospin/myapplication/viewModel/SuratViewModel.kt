@@ -29,5 +29,8 @@ class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
     fun getByDivisi(divisi: String) = repository.getByDivisi(divisi)
     fun getFiltered(divisi: String, tanggal: String) = repository.getFiltered(divisi, tanggal)
     fun cariSuratWithJenis(key: String, jenis: String) = repository.cariSuratWithJenis(key, jenis)
+    fun getByDivisiWithJenis(divisi: String, jenis: String) = repository.getByDivisiWithJenis(divisi, jenis)
+    fun getByTanggalWithJenis(tanggal: String, jenis: String) = repository.getByTanggalWithJenis(tanggal, jenis)
+    fun getFilteredWithJenis(divisi: String, tanggal: String, jenis: String) = repository.getFilteredWithJenis(divisi, tanggal, jenis)
 
 }

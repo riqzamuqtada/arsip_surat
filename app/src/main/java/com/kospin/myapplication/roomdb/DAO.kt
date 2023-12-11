@@ -35,4 +35,10 @@ interface DAO {
     fun getFiltered(divisi: String, tanggal: String) : List<DataAdapterSurat>
     @Query("SELECT id, no_surat, hal, jenis, divisi, tanggal FROM tb_surat WHERE (no_surat LIKE :key OR hal LIKE :key) AND jenis = :jenis")
     fun cariSuratWithJenis(key: String, jenis: String) : List<DataAdapterSurat>
+    @Query("SELECT id, no_surat, hal, jenis, divisi, tanggal FROM tb_surat WHERE divisi = :divisi AND jenis = :jenis")
+    fun getByDivisiWithJenis(divisi: String, jenis: String) : List<DataAdapterSurat>
+    @Query("SELECT id, no_surat, hal, jenis, divisi, tanggal FROM tb_surat WHERE tanggal = :tanggal AND jenis = :jenis")
+    fun getByTanggalWithJenis(tanggal: String, jenis: String) : List<DataAdapterSurat>
+    @Query("SELECT id, no_surat, hal, jenis, divisi, tanggal FROM tb_surat WHERE divisi = :divisi AND tanggal = :tanggal AND jenis = :jenis")
+    fun getFilteredWithJenis(divisi: String, tanggal: String, jenis: String) : List<DataAdapterSurat>
 }

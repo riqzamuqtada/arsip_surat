@@ -113,25 +113,25 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvAdpTanggal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins"
-                            android:text="12 September 2012"
-                            android:textColor="@color/black"
-                            android:ellipsize="end"
-                            android:maxLines="1" />
+                    <TextView
+                        android:id="@+id/tvAdpTanggal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="12 September 2012"
+                        android:textColor="@color/black"
+                        android:ellipsize="end"
+                        android:maxLines="1" />
 
-                        <TextView
-                            android:id="@+id/tvAdpDivisi"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins"
-                            android:text="Div. Pengembangan"
-                            android:textColor="@color/black"
-                            android:ellipsize="end"
-                            android:maxLines="1" />
+                    <TextView
+                        android:id="@+id/tvAdpDivisi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Div. Pengembangan"
+                        android:textColor="@color/black"
+                        android:ellipsize="end"
+                        android:maxLines="1" />
 
                 </LinearLayout>
 

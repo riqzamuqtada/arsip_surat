@@ -46,11 +46,7 @@ class AllSuratFragment : Fragment() {
         find.tvUsername.setText(username.toString())
 
 //        adapter
-        adapter = SuratAdapter(arrayListOf(), object : SuratAdapter.Onclik{
-            override fun deleteSurat(id: Int) {
-                deleteData(id)
-            }
-        })
+        adapter = SuratAdapter(arrayListOf(), viewModel())
         find.rvArsipSurat.adapter = adapter
         find.rvArsipSurat.layoutManager = LinearLayoutManager(requireContext())
 
@@ -68,6 +64,7 @@ class AllSuratFragment : Fragment() {
         })
 
 //        filter
+//          tanggal
         find.tvFilterTanggal.setOnClickListener {
             val datePicker  = DatePicker()
             datePicker.setOnDateSetListener { selectedDate ->
@@ -83,33 +80,19 @@ class AllSuratFragment : Fragment() {
         }
 
         find.tvFilterTanggal.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun afterTextChanged(s: Editable?) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 selectedTgl = find.tvFilterTanggal.text.toString()
-                when {
-                    selectedSpn == viewModel().divisi[0] && selectedTgl.isEmpty() -> {
-                        tampilData()
-                    }
-                    selectedSpn != viewModel().divisi[0] && selectedTgl.isEmpty() -> {
-                        setByDivisi()
-                    }
-                    selectedSpn == viewModel().divisi[0] && selectedTgl.isNotEmpty() -> {
-                        setByTanggal()
-                    }
-                    selectedSpn != viewModel().divisi[0] && selectedTgl.isNotEmpty() -> {
-                        setFiltered()
-                    }
-                }
+                filter()
             }
-
-            override fun afterTextChanged(s: Editable?) { }
 
         })
 
+//          divisi
         val spnFilterDivisi = find.spnFilterDivisi
-        val spnAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, viewModel().divisi)
-        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spnAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, viewModel().divisi)
         spnFilterDivisi.adapter = spnAdapter
 
         spnFilterDivisi.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -121,20 +104,7 @@ class AllSuratFragment : Fragment() {
             ) {
                 selectedSpn = parent?.getItemAtPosition(position).toString()
                 selectedTgl = find.tvFilterTanggal.text.toString()
-                when {
-                    position == 0 && selectedTgl.isEmpty() -> {
-                        tampilData()
-                    }
-                    position == 0 && selectedTgl.isNotEmpty() -> {
-                        setByTanggal()
-                    }
-                    position != 0 && selectedTgl.isEmpty() -> {
-                        setByDivisi()
-                    }
-                    position != 0 && selectedTgl.isNotEmpty() -> {
-                        setFiltered()
-                    }
-                }
+                filter()
             }
             override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
@@ -162,6 +132,23 @@ class AllSuratFragment : Fragment() {
         return PublicFunction.getSuratViewModel(requireContext())
     }
 
+    private fun filter() {
+        when {
+            selectedSpn == viewModel().divisi[0] && selectedTgl.isEmpty() -> {
+                tampilData()
+            }
+            selectedSpn != viewModel().divisi[0] && selectedTgl.isEmpty() -> {
+                setByDivisi()
+            }
+            selectedSpn == viewModel().divisi[0] && selectedTgl.isNotEmpty() -> {
+                setByTanggal()
+            }
+            selectedSpn != viewModel().divisi[0] && selectedTgl.isNotEmpty() -> {
+                setFiltered()
+            }
+        }
+    }
+
     private fun showNotif(data: List<DataAdapterSurat>, text: String = "Data tidak ditemukan") {
         if (data.isEmpty()){
             find.tvNotifikasi.setText(text)
@@ -169,30 +156,6 @@ class AllSuratFragment : Fragment() {
         } else {
             find.tvNotifikasi.visibility = View.GONE
         }
-    }
-
-    private fun deleteData(id: Int) {
-
-        val data = viewModel().getById(id)
-        val builder = AlertDialog.Builder(requireContext())
-
-        builder.setTitle("hapus data")
-        builder.setMessage("apakah anda yakin ingin menghapus surat ${data.hal}")
-
-        builder.setPositiveButton("OK") { dialog, _ ->
-            // Tindakan yang akan diambil saat tombol OK ditekan (bisa kosong jika tidak diperlukan)
-            viewModel().deleteSrt(data)
-            dialog.dismiss()
-            PublicFunction.alert("surat berhasil dihapus", requireContext())
-            tampilData()
-        }
-
-        builder.setNegativeButton("batal") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        val dialog = builder.create()
-        dialog.show()
     }
 
     private fun tampilData(){

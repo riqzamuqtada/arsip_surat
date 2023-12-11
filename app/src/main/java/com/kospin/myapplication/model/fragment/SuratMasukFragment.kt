@@ -1,5 +1,6 @@
 package com.kospin.myapplication.model.fragment
 
+import android.R
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -8,12 +9,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kospin.myapplication.adapter.DataAdapterSurat
 import com.kospin.myapplication.adapter.SuratAdapter
 import com.kospin.myapplication.databinding.FragmentSuratMasukBinding
+import com.kospin.myapplication.utils.DatePicker
 import com.kospin.myapplication.utils.PublicFunction
 import com.kospin.myapplication.viewmodel.SuratViewModel
 
@@ -22,6 +27,8 @@ class SuratMasukFragment : Fragment() {
     private var _find: FragmentSuratMasukBinding? = null
     private val find get() = _find!!
     private lateinit var adapter: SuratAdapter
+    private lateinit var selectedSpn: String
+    private lateinit var selectedTgl: String
     private val jenis: String = "Masuk"
 
     override fun onCreateView(
@@ -42,11 +49,7 @@ class SuratMasukFragment : Fragment() {
         find.tvUsername.setText(username.toString())
 
 //        set adapter
-        adapter = SuratAdapter(arrayListOf(), object : SuratAdapter.Onclik {
-            override fun deleteSurat(id: Int) {
-                deleteData(id)
-            }
-        })
+        adapter = SuratAdapter(arrayListOf(), viewModel())
         find.rvArsipSuratMasuk.adapter = adapter
         find.rvArsipSuratMasuk.layoutManager = LinearLayoutManager(requireContext())
 
@@ -64,6 +67,54 @@ class SuratMasukFragment : Fragment() {
             }
 
         })
+
+//        filter
+//        tanggal
+        find.tvFilterTanggalMasuk.setOnClickListener {
+            val datePicker = DatePicker()
+            datePicker.setOnDateSetListener {
+                find.tvFilterTanggalMasuk.setText(it)
+                find.btnCancelTanggalMasuk.visibility = View.VISIBLE
+            }
+            datePicker.show(requireFragmentManager(), "datePicker")
+        }
+
+        find.btnCancelTanggalMasuk.setOnClickListener {
+            find.tvFilterTanggalMasuk.text = null
+            find.btnCancelTanggalMasuk.visibility = View.GONE
+        }
+
+        find.tvFilterTanggalMasuk.addTextChangedListener(object : TextWatcher {
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun afterTextChanged(s: Editable?) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                selectedTgl = find.tvFilterTanggalMasuk.text.toString()
+                filter()
+            }
+
+        })
+
+//          divisi
+        val spnFilterDivisi = find.spnFilterDivisiMasuk
+        val spnAdapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_dropdown_item, viewModel().divisi)
+        spnFilterDivisi.adapter = spnAdapter
+
+        spnFilterDivisi.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedSpn = parent?.getItemAtPosition(position).toString()
+                selectedTgl = find.tvFilterTanggalMasuk.text.toString()
+                filter()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) { }
+
+        }
 
     }
 
@@ -84,6 +135,23 @@ class SuratMasukFragment : Fragment() {
 
     private fun viewModel(): SuratViewModel {
         return PublicFunction.getSuratViewModel(requireContext())
+    }
+
+    private fun filter() {
+        when {
+            selectedSpn == viewModel().divisi[0] && selectedTgl.isEmpty() -> {
+                tampilData()
+            }
+            selectedSpn != viewModel().divisi[0] && selectedTgl.isEmpty() -> {
+                setByDivisi()
+            }
+            selectedSpn == viewModel().divisi[0] && selectedTgl.isNotEmpty() -> {
+                setByTanggal()
+            }
+            selectedSpn != viewModel().divisi[0] && selectedTgl.isNotEmpty() -> {
+                setFiltered()
+            }
+        }
     }
 
     private fun showNotif(data: List<DataAdapterSurat>, text: String = "Data tidak ditemukan") {
@@ -130,6 +198,24 @@ class SuratMasukFragment : Fragment() {
 
     private fun setSearch(key: CharSequence) {
         val data = viewModel().cariSuratWithJenis("%$key%", jenis)
+        adapter.setData(data)
+        showNotif(data)
+    }
+
+    private fun setByDivisi() {
+        val data = viewModel().getByDivisiWithJenis(selectedSpn, jenis)
+        adapter.setData(data)
+        showNotif(data)
+    }
+
+    private fun setByTanggal() {
+        val data = viewModel().getByTanggalWithJenis(selectedTgl, jenis)
+        adapter.setData(data)
+        showNotif(data)
+    }
+
+    private fun setFiltered() {
+        val data = viewModel().getFilteredWithJenis(selectedSpn, selectedTgl, jenis)
         adapter.setData(data)
         showNotif(data)
     }
