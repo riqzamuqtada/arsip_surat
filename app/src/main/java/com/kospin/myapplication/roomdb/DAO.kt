@@ -41,4 +41,8 @@ interface DAO {
     fun getByTanggalWithJenis(tanggal: String, jenis: String) : List<DataAdapterSurat>
     @Query("SELECT id, no_surat, hal, jenis, divisi, tanggal FROM tb_surat WHERE divisi = :divisi AND tanggal = :tanggal AND jenis = :jenis")
     fun getFilteredWithJenis(divisi: String, tanggal: String, jenis: String) : List<DataAdapterSurat>
+    @Query("SELECT COUNT(*) FROM tb_surat WHERE jenis = :jenis")
+    fun getJumlahByJenis(jenis: String) : LiveData<Float>
+    @Query("SELECT COUNT(*) FROM tb_surat WHERE divisi = :divisi AND jenis = :jenis")
+    fun getJumlahDivisiByJenis(divisi: String, jenis: String) : LiveData<Float>
 }
