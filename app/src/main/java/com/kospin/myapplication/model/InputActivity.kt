@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -39,10 +40,11 @@ class InputActivity : AppCompatActivity() {
     private lateinit var selectedItemJenis : String
     private lateinit var foto : ByteArray
     private var currentPhotoPath: String? = null
-    private val REQUEST_IMAGE_CAPTURE = 1
-    private val REQUEST_IMAGE_PICK = 2
+    private var currentPickedImagePath: String? = null
     private var opsiDivisi : Int = 0
     private var opsiJenis : Int = 0
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val REQUEST_IMAGE_PICK = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -209,7 +211,7 @@ class InputActivity : AppCompatActivity() {
     }
 
     private fun showOptionsDialog() {
-        val options = arrayOf("Kamera", "Galeri")
+        val options = arrayOf("Kamera", "File Foto")
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Pilih salah satu")
@@ -226,7 +228,7 @@ class InputActivity : AppCompatActivity() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
                 val photoFile: File? = try {
-                    createImageFile()
+                    createImageFile(true)
                 } catch (ex: IOException) {
                     null
                 }
@@ -244,22 +246,25 @@ class InputActivity : AppCompatActivity() {
         }
     }
 
-    private fun createImageFile(): File? {
+    private fun createImageFile(type: Boolean): File? {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
-            currentPhotoPath = absolutePath
+            if (type) {
+                currentPhotoPath = absolutePath
+            } else {
+                currentPickedImagePath = absolutePath
+            }
         }
     }
 
     private fun dispatchPickImageIntent() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        intent.type = "image/*"
-//        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-//            addCategory(Intent.CATEGORY_OPENABLE)
-//            type = "image/*"
-//        }
-        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+        Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "image/*"
+        }.also { intent ->
+            startActivityForResult(intent, REQUEST_IMAGE_PICK)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -272,34 +277,38 @@ class InputActivity : AppCompatActivity() {
                     // Lakukan sesuatu dengan currentPhotoPath
                     val imgCompres = compressImageToByteArray(currentPhotoPath!!, this)
                     foto = imgCompres
+                    Log.d("foto path", data?.data.toString())
 
                     find.tvInputFoto.text = File(currentPhotoPath).name
                 }
                 REQUEST_IMAGE_PICK -> {
-                    // Gambar telah dipilih dari galeri
-                    val selectedImage = getPathFromUri(data?.data!!)
-                    // Lakukan sesuatu dengan selectedImage
-                    val imgCompres = compressImageToByteArray(selectedImage, this)
-                    foto = imgCompres
 
-                    find.tvInputFoto.text = File(selectedImage).name
+                    val selectedImageUri = data?.data
+
+                    if (selectedImageUri != null) {
+                        // Membuat file temporer untuk menyimpan gambar yang dipilih
+                        val pickedImageFile = createImageFile(false)
+
+                        // Menyalin konten URI ke file temporer
+                        pickedImageFile?.let { file ->
+                            contentResolver.openInputStream(selectedImageUri)?.use { inputStream ->
+                                file.outputStream().use { outputStream ->
+                                    inputStream.copyTo(outputStream)
+                                }
+                            }
+
+                            // Lakukan sesuatu dengan file atau path
+                            val imagePath = currentPickedImagePath
+                            // Gunakan imagePath atau file sesuai kebutuhan Anda
+                            val imgCompresed = compressImageToByteArray(imagePath!!, this)
+                            foto = imgCompresed
+                            find.tvInputFoto.text = File(imagePath).name
+                        }
+                    }
                 }
             }
         }
 
-    }
-
-    private fun getPathFromUri(uri: Uri): String {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(uri, projection, null, null, null)
-
-        cursor?.use {
-            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            it.moveToFirst()
-            return it.getString(columnIndex)
-        }
-
-        return ""
     }
 
     // Fungsi untuk mengkompres gambar menjadi ByteArray dengan mempertahankan orientasi
@@ -314,7 +323,7 @@ class InputActivity : AppCompatActivity() {
         BitmapFactory.decodeFile(imagePath, options)
 
         // Hitung skala kompresi berdasarkan ukuran yang diinginkan
-        val scale = calculateScale(options, targetSizeInMb = 1.0)
+        val scale = calculateScale(options, targetSizeInMb = 0.75)
 
         // Konfigurasi ulang untuk mendekompresi gambar dengan skala yang benar
         options.inJustDecodeBounds = false

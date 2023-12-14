@@ -16,7 +16,7 @@ class LoadingActivity : AppCompatActivity() {
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.main_blue_dark))
 
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 3000)
 
