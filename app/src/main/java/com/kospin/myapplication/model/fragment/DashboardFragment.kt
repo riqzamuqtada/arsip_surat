@@ -27,8 +27,6 @@ class DashboardFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var _find: FragmentDashboardBinding? = null
     private val find get() = _find!!
-    private val masuk = "Masuk"
-    private val keluar = "Keluar"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

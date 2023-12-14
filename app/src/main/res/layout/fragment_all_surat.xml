@@ -168,7 +168,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tvNotifikasi"
+        android:id="@+id/lyNotifikasiSrt"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -178,7 +178,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imgNotif"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/img_not_found"
@@ -188,29 +188,29 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvNotifikasiNotFound"
+            android:id="@+id/tvNotifLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/ubuntu_bold"
-            android:text="@string/empty_data_label"
+            android:text="@string/notfound_data_label"
             android:textColor="@color/main_blue_light"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+            app:layout_constraintTop_toBottomOf="@+id/imgNotif" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvNotifDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/empty_data_desc"
+            android:text="@string/notfound_data_desc"
             android:textAlignment="center"
             android:textColor="@color/dark_easy"
-            app:layout_constraintEnd_toEndOf="@+id/tvNotifikasiNotFound"
-            app:layout_constraintStart_toStartOf="@+id/tvNotifikasiNotFound"
-            app:layout_constraintTop_toBottomOf="@+id/tvNotifikasiNotFound" />
+            app:layout_constraintEnd_toEndOf="@+id/tvNotifLabel"
+            app:layout_constraintStart_toStartOf="@+id/tvNotifLabel"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotifLabel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

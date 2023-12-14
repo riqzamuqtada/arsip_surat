@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kospin.myapplication.R
 import com.kospin.myapplication.adapter.DataAdapterSurat
 import com.kospin.myapplication.adapter.SuratAdapter
 import com.kospin.myapplication.databinding.FragmentAllSuratBinding
@@ -150,11 +151,20 @@ class AllSuratFragment : Fragment() {
         }
     }
 
-    private fun showNotif(data: List<DataAdapterSurat>, text: String = "Data tidak ditemukan") {
+    private fun showNotif(data: List<DataAdapterSurat>, type: Boolean = false) {
         if (data.isEmpty()){
-            find.tvNotifikasi.visibility = View.VISIBLE
+            find.lyNotifikasiSrt.visibility = View.VISIBLE
+            if (type) {
+                find.imgNotif.setImageResource(R.drawable.img_empty_data)
+                find.tvNotifLabel.setText(R.string.empty_data_label)
+                find.tvNotifDesc.setText(R.string.empty_data_desc)
+            } else {
+                find.imgNotif.setImageResource(R.drawable.img_not_found)
+                find.tvNotifLabel.setText(R.string.notfound_data_label)
+                find.tvNotifDesc.setText(R.string.notfound_data_desc)
+            }
         } else {
-            find.tvNotifikasi.visibility = View.GONE
+            find.lyNotifikasiSrt.visibility = View.GONE
         }
     }
 
@@ -162,7 +172,7 @@ class AllSuratFragment : Fragment() {
         val data = viewModel().getAllSurat()
         data.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
-            showNotif(it, "Tambah data terlebih dahulu")
+            showNotif(it, true)
         })
     }
 
