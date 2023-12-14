@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_white_light"
-    tools:context=".model.mainmodel.fragment.SuratKeluarFragment">
+    tools:context=".model.fragment.SuratKeluarFragment">
 
     <TextView
         android:id="@+id/tvUsername"
@@ -24,7 +24,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-6dp"
+        android:layout_marginTop="-8dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Arsip Surat"
         android:textColor="@color/main_blue_dark"
@@ -50,29 +50,29 @@
         android:id="@+id/tvIconSurat"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="12dp"
         android:src="@drawable/ic_header_suratkeluar"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvUsername" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etSearch"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ip_nav_surat"
         android:drawableEnd="@drawable/ic_search"
+        android:elevation="2dp"
         android:ems="10"
         android:fontFamily="@font/poppins"
         android:hint="Search"
         android:inputType="text"
         android:paddingHorizontal="12dp"
         android:textColor="@color/main_blue_dark"
-        android:textColorHint="@color/text_hint"
+        android:textColorHint="#A0A0A0"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,49 +81,88 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/etSearch"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSearch">
 
-        <Spinner
-            android:id="@+id/spnFilterDivisi"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="6dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
-            android:background="@drawable/ip_nav_surat" />
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="2dp"
+            app:cardMaxElevation="6dp">
 
-        <EditText
-            android:id="@+id/etFilterTanggal"
+            <Spinner
+                android:id="@+id/spnFilterDivisi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/ipFilterTanggal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:background="@drawable/ip_nav_surat"
-            android:ems="10"
-            android:fontFamily="@font/poppins"
-            android:hint="Pilih Tanggal"
-            android:inputType="text"
-            android:paddingHorizontal="12dp"
-            android:textColor="@color/main_blue_dark"
-            android:textColorHint="@color/text_hint"
-            android:textSize="16sp" />
+            android:elevation="2dp"
+            android:orientation="horizontal"
+            android:paddingEnd="4dp">
+
+            <HorizontalScrollView
+                android:id="@+id/hsvFilterTanggal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tvFilterTanggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ip_nav_surat"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_vertical"
+                    android:hint="Pilih Tanggal"
+                    android:paddingStart="12dp"
+                    android:textColor="@color/main_blue_dark"
+                    android:textColorHint="#A0A0A0"
+                    android:textSize="16sp" />
+            </HorizontalScrollView>
+
+            <ImageButton
+                android:id="@+id/btnFltTanggalCancel"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ip_nav_surat"
+                android:src="@drawable/ic_cancel"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/divider2"
         android:layout_width="match_parent"
         android:layout_height="3.6dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="4dp"
         android:background="?android:attr/listDivider"
-        android:backgroundTint="@color/dark_hard"
+        android:backgroundTint="@color/dark_medium"
         android:elevation="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,11 +172,60 @@
         android:id="@+id/rvArsipSurat"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        tools:listitem="@layout/adapter_surat" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        tools:listitem="@layout/adapter_surat">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tvNotifikasi"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/img_not_found"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNotifikasiNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="@string/empty_data_label"
+            android:textColor="@color/main_blue_light"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/empty_data_desc"
+            android:textAlignment="center"
+            android:textColor="@color/dark_easy"
+            app:layout_constraintEnd_toEndOf="@+id/tvNotifikasiNotFound"
+            app:layout_constraintStart_toStartOf="@+id/tvNotifikasiNotFound"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotifikasiNotFound" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

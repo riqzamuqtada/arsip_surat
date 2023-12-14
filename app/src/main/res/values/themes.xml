@@ -3,7 +3,7 @@
     <style name="Base.Theme.ArsipSurat" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/main_blue_dark</item>
-        <item name="colorButtonNormal">@color/main_blue_dark</item>
+        <item name="colorButtonNormal">@color/main_blue_light</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 

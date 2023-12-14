@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">arsipSurat</string>
+    <string name="app_name">Arsip Surat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  Undifined Data  -->
+    <string name="empty_data_label">Uh-oh!</string>
+    <string name="empty_data_desc">Tidak ada hasil untuk pencarian Anda. Silahkan periksa kembali kata kunci Anda.</string>
+    <string name="notfound_data_label">Oops!</string>
+    <string name="notfound_data_desc">Tidak ada data yang tersedia untuk ditampilkan di sini. Tambahkan data untuk melihatnya.</string>
 </resources>
