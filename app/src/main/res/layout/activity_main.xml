@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".model.MainActivity">
+    tools:context=".MainActivity">
 
     <fragment
         android:id="@+id/navhost_fragment"
@@ -35,7 +35,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:background="@color/white"
         app:itemIconSize="24dp"
         app:itemIconTint="?attr/colorButtonNormal"

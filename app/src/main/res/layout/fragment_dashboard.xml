@@ -10,14 +10,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/dashboardText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dashboard Fragment"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints" />
-
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="0dp"
