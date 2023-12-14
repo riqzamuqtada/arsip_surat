@@ -10,9 +10,6 @@
         android:name="com.kospin.myapplication.model.fragment.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
-        <action
-            android:id="@+id/action_dashboardFragment_to_allSuratFragment"
-            app:destination="@id/allSuratFragment" />
     </fragment>
     <fragment
         android:id="@+id/allSuratFragment"
