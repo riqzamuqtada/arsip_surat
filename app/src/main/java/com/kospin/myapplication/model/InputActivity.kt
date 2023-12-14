@@ -148,6 +148,16 @@ class InputActivity : AppCompatActivity() {
         return PublicFunction.getSuratViewModel(this)
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fade_in, R.anim.to_down)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        overridePendingTransition(R.anim.from_down, R.anim.solid)
+    }
+
     private fun modeUpdate(id: Int) {
         val data = viewModel().getById(id)
 

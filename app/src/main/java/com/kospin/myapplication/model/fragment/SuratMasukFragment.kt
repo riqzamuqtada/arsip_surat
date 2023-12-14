@@ -147,10 +147,9 @@ class SuratMasukFragment : Fragment() {
 
     private fun showNotif(data: List<DataAdapterSurat>, text: String = "Data tidak ditemukan") {
         if (data.isEmpty()) {
-            find.tvNotifikasiSrtMasuk.visibility = View.VISIBLE
-            find.tvNotifikasiSrtMasuk.setText(text)
+            find.lyNotifikasiSrtMasuk.visibility = View.VISIBLE
         } else {
-            find.tvNotifikasiSrtMasuk.visibility = View.GONE
+            find.lyNotifikasiSrtMasuk.visibility = View.GONE
         }
     }
 

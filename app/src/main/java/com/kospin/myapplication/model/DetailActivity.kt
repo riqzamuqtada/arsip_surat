@@ -49,11 +49,17 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        overridePendingTransition(R.anim.from_down, R.anim.solid)
+    }
+
     override fun onBackPressed() {
         if (find.lyFotoZoom.visibility == View.VISIBLE){
             find.lyFotoZoom.visibility = View.GONE
         } else {
             super.onBackPressed()
+            overridePendingTransition(R.anim.solid, R.anim.to_down)
         }
     }
 }

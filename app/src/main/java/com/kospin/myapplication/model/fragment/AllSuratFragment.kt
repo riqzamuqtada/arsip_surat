@@ -152,7 +152,6 @@ class AllSuratFragment : Fragment() {
 
     private fun showNotif(data: List<DataAdapterSurat>, text: String = "Data tidak ditemukan") {
         if (data.isEmpty()){
-            find.tvNotifikasi.setText(text)
             find.tvNotifikasi.visibility = View.VISIBLE
         } else {
             find.tvNotifikasi.visibility = View.GONE
