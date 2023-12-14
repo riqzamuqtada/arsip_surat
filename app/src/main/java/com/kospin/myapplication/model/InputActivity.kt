@@ -7,33 +7,25 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.ExifInterface
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.lifecycle.ViewModelProviders
 import com.github.chrisbanes.photoview.BuildConfig
 import com.kospin.myapplication.R
-import com.kospin.myapplication.roomdb.DbArsipSurat
 import com.kospin.myapplication.roomdb.Surat
 import com.kospin.myapplication.databinding.ActivityInputBinding
 import com.kospin.myapplication.utils.DatePicker
-import com.kospin.myapplication.viewmodel.SuratRepository
+import com.kospin.myapplication.utils.PublicFunction
 import com.kospin.myapplication.viewmodel.SuratViewModel
-import com.kospin.myapplication.viewmodel.SuratViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -48,11 +40,11 @@ class InputActivity : AppCompatActivity() {
     private lateinit var selectedItemJenis : String
     private lateinit var foto : ByteArray
     private var currentPhotoPath: String? = null
-    private val REQUEST_IMAGE_CAPTURE = 1
-    private val REQUEST_IMAGE_PICK = 2
+    private var currentPickedImagePath: String? = null
     private var opsiDivisi : Int = 0
     private var opsiJenis : Int = 0
-    private val db by lazy { DbArsipSurat.getInstance(this) }
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val REQUEST_IMAGE_PICK = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,17 +109,17 @@ class InputActivity : AppCompatActivity() {
                 find.etInputNomor.text.isNotEmpty() &&
                 find.etInputHal.text.isNotEmpty() &&
                 find.tvInputTanggal.text.isNotEmpty() &&
-                selectedItemJenis !== "pilih jenis" &&
-                selectedItemDivisi !== "unit/divisi" &&
+                selectedItemJenis !== dataJenis[0] &&
+                selectedItemDivisi !== viewModel().divisi[0] &&
                 foto.isNotEmpty()
             ){
                 try {
                     insertSurat()
                 } catch (e:Exception){
-                    alert("Error : $e")
+                    PublicFunction.alert("Error : $e", this)
                 }
             } else {
-                alert("Lengkapi data yang diperlukan terlebih dahulu!")
+                PublicFunction.alert("Lengkapi data yang diperlukan terlebih dahulu!", this)
             }
         }
 
@@ -136,24 +128,28 @@ class InputActivity : AppCompatActivity() {
                 find.etInputNomor.text.isNotEmpty() &&
                 find.etInputHal.text.isNotEmpty() &&
                 find.tvInputTanggal.text.isNotEmpty() &&
-                selectedItemJenis !== "pilih jenis" &&
-                selectedItemDivisi !== "unit/divisi" &&
+                selectedItemJenis !== dataJenis[0] &&
+                selectedItemDivisi !== viewModel().divisi[0] &&
                 foto.isNotEmpty()
             ){
                 try {
                     updateSurat(id)
                 } catch (e:Exception){
-                    alert("Error : $e")
+                    PublicFunction.alert("Error : $e", this)
                 }
             } else {
-                alert("Lengkapi data yang diperlukan terlebih dahulu!")
+                PublicFunction.alert("Lengkapi data yang diperlukan terlebih dahulu!", this)
             }
         }
 
     }
 
+    private fun viewModel(): SuratViewModel {
+        return PublicFunction.getSuratViewModel(this)
+    }
+
     private fun modeUpdate(id: Int) {
-        val data = db.dao().getById(id)
+        val data = viewModel().getById(id)
 
         find.btnInputInsert.visibility = View.GONE
         find.tvFormTitle.setText("Update Arsip Surat")
@@ -169,20 +165,14 @@ class InputActivity : AppCompatActivity() {
 
     }
 
-    private fun viewModel(): SuratViewModel {
-        val repository = SuratRepository(db)
-        val factory = SuratViewModelFactory(repository)
-        return ViewModelProviders.of(this, factory).get(SuratViewModel::class.java)
-    }
-
     private fun modeTambah() {
         find.btnInputUpdate.visibility = View.GONE
         find.tvFormTitle.setText("Tambah Arsip Surat")
     }
 
     private fun insertSurat() {
-        CoroutineScope(Dispatchers.IO).launch {
-            db.dao().insertSrt(Surat(
+        viewModel().insertSrt(
+            Surat(
                 0,
                 find.etInputNomor.text.toString(),
                 find.etInputHal.text.toString(),
@@ -191,49 +181,37 @@ class InputActivity : AppCompatActivity() {
                 find.tvInputTanggal.text.toString(),
                 find.etInputCatatan.text.toString(),
                 foto
-            ))
-            withContext(Dispatchers.Main){
-                alert("Data Arsip Surat berhasil ditambahkan!")
-                onBackPressed()
-            }
-        }
+            )
+        )
+        PublicFunction.alert("Data Arsip Surat berhasil ditambahkan!", this)
+        onBackPressed()
     }
 
     private fun updateSurat(id: Int) {
-        CoroutineScope(Dispatchers.IO).launch {
-            db.dao().updateSrt(
-                Surat(
-                    id,
-                    find.etInputNomor.text.toString(),
-                    find.etInputHal.text.toString(),
-                    selectedItemJenis,
-                    selectedItemDivisi,
-                    find.tvInputTanggal.text.toString(),
-                    find.etInputCatatan.text.toString(),
-                    foto
-                )
+        viewModel().updateSrt(
+            Surat(
+                id,
+                find.etInputNomor.text.toString(),
+                find.etInputHal.text.toString(),
+                selectedItemJenis,
+                selectedItemDivisi,
+                find.tvInputTanggal.text.toString(),
+                find.etInputCatatan.text.toString(),
+                foto
             )
-            withContext(Dispatchers.Main){
-                alert("Data Arsip Surat berhasil diubah!")
-                onBackPressed()
-            }
-        }
-    }
-
-    private fun alert(msg: String){
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        )
+        PublicFunction.alert("Data Arsip Surat berhasil diubah!", this)
+        onBackPressed()
     }
 
     private fun setupSpinner(spinner: Spinner, data: Array<String>, opsi: Int){
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, data)
         spinner.adapter = adapter
-
         spinner.setSelection(opsi)
     }
 
     private fun showOptionsDialog() {
-        val options = arrayOf("Kamera", "Galeri")
+        val options = arrayOf("Kamera", "File Foto")
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Pilih salah satu")
@@ -250,7 +228,7 @@ class InputActivity : AppCompatActivity() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
                 val photoFile: File? = try {
-                    createImageFile()
+                    createImageFile(true)
                 } catch (ex: IOException) {
                     null
                 }
@@ -268,18 +246,25 @@ class InputActivity : AppCompatActivity() {
         }
     }
 
-    private fun createImageFile(): File? {
+    private fun createImageFile(type: Boolean): File? {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
-            currentPhotoPath = absolutePath
+            if (type) {
+                currentPhotoPath = absolutePath
+            } else {
+                currentPickedImagePath = absolutePath
+            }
         }
     }
 
     private fun dispatchPickImageIntent() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        intent.type = "image/*"
-        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+        Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "image/*"
+        }.also { intent ->
+            startActivityForResult(intent, REQUEST_IMAGE_PICK)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -292,34 +277,38 @@ class InputActivity : AppCompatActivity() {
                     // Lakukan sesuatu dengan currentPhotoPath
                     val imgCompres = compressImageToByteArray(currentPhotoPath!!, this)
                     foto = imgCompres
+                    Log.d("foto path", data?.data.toString())
 
                     find.tvInputFoto.text = File(currentPhotoPath).name
                 }
                 REQUEST_IMAGE_PICK -> {
-                    // Gambar telah dipilih dari galeri
-                    val selectedImage = getPathFromUri(data?.data!!)
-                    // Lakukan sesuatu dengan selectedImage
-                    val imgCompres = compressImageToByteArray(selectedImage, this)
-                    foto = imgCompres
 
-                    find.tvInputFoto.text = File(selectedImage).name
+                    val selectedImageUri = data?.data
+
+                    if (selectedImageUri != null) {
+                        // Membuat file temporer untuk menyimpan gambar yang dipilih
+                        val pickedImageFile = createImageFile(false)
+
+                        // Menyalin konten URI ke file temporer
+                        pickedImageFile?.let { file ->
+                            contentResolver.openInputStream(selectedImageUri)?.use { inputStream ->
+                                file.outputStream().use { outputStream ->
+                                    inputStream.copyTo(outputStream)
+                                }
+                            }
+
+                            // Lakukan sesuatu dengan file atau path
+                            val imagePath = currentPickedImagePath
+                            // Gunakan imagePath atau file sesuai kebutuhan Anda
+                            val imgCompresed = compressImageToByteArray(imagePath!!, this)
+                            foto = imgCompresed
+                            find.tvInputFoto.text = File(imagePath).name
+                        }
+                    }
                 }
             }
         }
 
-    }
-
-    private fun getPathFromUri(uri: Uri): String {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(uri, projection, null, null, null)
-
-        cursor?.use {
-            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            it.moveToFirst()
-            return it.getString(columnIndex)
-        }
-
-        return ""
     }
 
     // Fungsi untuk mengkompres gambar menjadi ByteArray dengan mempertahankan orientasi
@@ -334,7 +323,7 @@ class InputActivity : AppCompatActivity() {
         BitmapFactory.decodeFile(imagePath, options)
 
         // Hitung skala kompresi berdasarkan ukuran yang diinginkan
-        val scale = calculateScale(options, targetSizeInMb = 1.0)
+        val scale = calculateScale(options, targetSizeInMb = 0.75)
 
         // Konfigurasi ulang untuk mendekompresi gambar dengan skala yang benar
         options.inJustDecodeBounds = false
