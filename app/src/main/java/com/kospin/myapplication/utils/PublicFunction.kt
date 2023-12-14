@@ -14,8 +14,8 @@ object PublicFunction {
         val db = DbArsipSurat.getInstance(context)
         val repository = SuratRepository(db)
         val factory = SuratViewModelFactory(repository)
-        return ViewModelProviders.of(context as androidx.fragment.app.FragmentActivity, factory)
-            .get(SuratViewModel::class.java)
+        val viewModel = ViewModelProviders.of(context as androidx.fragment.app.FragmentActivity, factory).get(SuratViewModel::class.java)
+        return viewModel
     }
 
     fun alert(msg: String, context: Context) {

@@ -12,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kospin.myapplication.R
 import com.kospin.myapplication.adapter.DataAdapterSurat
 import com.kospin.myapplication.adapter.SuratAdapter
 import com.kospin.myapplication.databinding.FragmentSuratKeluarBinding
@@ -145,9 +146,18 @@ class SuratKeluarFragment : Fragment() {
         }
     }
 
-    private fun showNotif(data: List<DataAdapterSurat>, text: String = "Data tidak ditemukan") {
-        if (data.isEmpty()) {
+    private fun showNotif(data: List<DataAdapterSurat>, type: Boolean = false) {
+        if (data.isEmpty()){
             find.lyNotifikasiSrtKeluar.visibility = View.VISIBLE
+            if (type) {
+                find.imgNotifKeluar.setImageResource(R.drawable.img_empty_data)
+                find.tvNotifLabelKeluar.setText(R.string.empty_data_label)
+                find.tvNotifDescKeluar.setText(R.string.empty_data_desc)
+            } else {
+                find.imgNotifKeluar.setImageResource(R.drawable.img_not_found)
+                find.tvNotifLabelKeluar.setText(R.string.notfound_data_label)
+                find.tvNotifDescKeluar.setText(R.string.notfound_data_desc)
+            }
         } else {
             find.lyNotifikasiSrtKeluar.visibility = View.GONE
         }
@@ -157,7 +167,7 @@ class SuratKeluarFragment : Fragment() {
         val data = viewModel().getJenisSrtNoFoto(jenis)
         data.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
-            showNotif(it,"Tambah data terlebih dahulu")
+            showNotif(it,true)
         })
     }
 

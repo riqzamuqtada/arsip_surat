@@ -192,7 +192,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imgNotifKeluar"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/img_not_found"
@@ -202,7 +202,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvNotifikasiNotFound"
+            android:id="@+id/tvNotifLabelKeluar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -212,19 +212,19 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+            app:layout_constraintTop_toBottomOf="@+id/imgNotifKeluar" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvNotifDescKeluar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/empty_data_desc"
             android:textAlignment="center"
             android:textColor="@color/dark_easy"
-            app:layout_constraintEnd_toEndOf="@+id/tvNotifikasiNotFound"
-            app:layout_constraintStart_toStartOf="@+id/tvNotifikasiNotFound"
-            app:layout_constraintTop_toBottomOf="@+id/tvNotifikasiNotFound" />
+            app:layout_constraintEnd_toEndOf="@+id/tvNotifLabelKeluar"
+            app:layout_constraintStart_toStartOf="@+id/tvNotifLabelKeluar"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotifLabelKeluar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
