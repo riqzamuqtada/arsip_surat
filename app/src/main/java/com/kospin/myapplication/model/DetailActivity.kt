@@ -51,7 +51,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        overridePendingTransition(R.anim.from_down, R.anim.solid)
+        overridePendingTransition(R.anim.from_down, R.anim.pinch_out)
     }
 
     override fun onBackPressed() {
@@ -59,7 +59,7 @@ class DetailActivity : AppCompatActivity() {
             find.lyFotoZoom.visibility = View.GONE
         } else {
             super.onBackPressed()
-            overridePendingTransition(R.anim.solid, R.anim.to_down)
+            overridePendingTransition(R.anim.pinch_in, R.anim.to_down)
         }
     }
 }

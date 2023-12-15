@@ -2,11 +2,8 @@ package com.kospin.myapplication.model
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.kospin.myapplication.MainActivity
 import com.kospin.myapplication.R
@@ -33,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
             if (inputUsername.text.isNotEmpty() && inputPassword.text.isNotEmpty()){
                 if (inputPassword.text.toString() == password){
                     startActivity(Intent(this, MainActivity::class.java))
+                    overridePendingTransition(R.anim.fade_in, R.anim.to_right)
                     val sheredPreferences = getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
                     sheredPreferences.edit().putString("username", inputUsername.text.toString()).apply()
                     finish()
@@ -44,7 +42,11 @@ class LoginActivity : AppCompatActivity() {
                 PublicFunction.alert("Username dan Password tidak boleh Kosong!", this)
             }
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        overridePendingTransition(R.anim.from_left, R.anim.solid)
     }
 
 }

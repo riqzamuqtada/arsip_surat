@@ -150,12 +150,12 @@ class InputActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.fade_in, R.anim.to_down)
+        overridePendingTransition(R.anim.pinch_in, R.anim.to_down)
     }
 
     override fun onResume() {
         super.onResume()
-        overridePendingTransition(R.anim.from_down, R.anim.solid)
+        overridePendingTransition(R.anim.from_down, R.anim.pinch_out)
     }
 
     private fun modeUpdate(id: Int) {
