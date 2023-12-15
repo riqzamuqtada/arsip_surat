@@ -31,7 +31,7 @@
         android:textColor="@color/main_white_dark"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnDashboardLogout" />
+        app:layout_constraintTop_toTopOf="@+id/btnDashboardMenu" />
 
     <TextView
         android:id="@+id/textView5"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDashboardUsername" />
 
     <ImageView
-        android:id="@+id/btnDashboardLogout"
+        android:id="@+id/btnDashboardMenu"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginTop="32dp"

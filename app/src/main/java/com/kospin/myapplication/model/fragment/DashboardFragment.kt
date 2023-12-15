@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.github.mikephil.charting.animation.Easing
@@ -43,25 +45,9 @@ class DashboardFragment : Fragment() {
         val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
         val username = sheredPreferences.getString("username", null)
         find.tvDashboardUsername.setText(username.toString())
-        find.btnDashboardLogout.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
 
-            builder.setTitle("Logout")
-            builder.setMessage("apakah anda yakin ingin Logout")
-
-            builder.setPositiveButton("ya"){ dialog, _ ->
-                startActivity(Intent(requireContext(), LoginActivity::class.java))
-                val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
-                sheredPreferences.edit().clear().apply()
-                requireActivity().finish()
-                dialog.dismiss()
-            }
-
-            builder.setNegativeButton("tidak"){ dialog, _ ->
-                dialog.dismiss()
-            }
-            builder.create().show()
-        }
+        val menuButton = find.btnDashboardMenu
+        menuButton.setOnClickListener { showPopupMenu(menuButton) }
 
 //        pieChart jenis surat
         viewModel().dataPieJenis.observe(viewLifecycleOwner, Observer { data ->
@@ -77,6 +63,62 @@ class DashboardFragment : Fragment() {
         viewModel().dataPieKeluar.observe(viewLifecycleOwner, Observer { data ->
             setChartBlue(find.cpSuratKeluar, data)
         })
+
+    }
+
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.menuInflater.inflate(R.menu.dashboard_menu_options, popupMenu.menu)
+
+        // Set listener untuk menangani item yang dipilih
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_about_app -> {
+                    // Lakukan aksi untuk "Tentang App"
+                    true
+                }
+                R.id.menu_clear_trash -> {
+                    // Lakukan aksi untuk "Hapus Sampah"
+                    true
+                }
+                R.id.menu_logout -> {
+                    logout()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
+    }
+
+    private fun logout(){
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Konfirmasi Logout")
+        builder.setMessage("Apakah Anda yakin ingin keluar dari akun Anda? Keluar akan mengakhiri sesi.")
+
+        builder.setPositiveButton("Logout"){ dialog, _ ->
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
+            sheredPreferences.edit().clear().apply()
+            requireActivity().finish()
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Batal"){ dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = builder.create()
+
+        alertDialog.show()
+
+        val positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+        val negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
+        positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.clr_red))
+        negativeButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_hard))
 
     }
 
