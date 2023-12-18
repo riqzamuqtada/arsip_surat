@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
 
-    private val corouTine = CoroutineScope(Dispatchers.Main)
+    private val coroutine = CoroutineScope(Dispatchers.Main)
     private val masuk = "Masuk"
     private val keluar = "Keluar"
 
@@ -18,9 +18,9 @@ class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
     val divisi: Array<String> = arrayOf("unit/divisi", "Pengurus", "Kesekretariatan", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional")
 
 //    edit data surat
-    fun insertSrt(surat: Surat) = corouTine.launch { repository.insertSrt(surat) }
-    fun updateSrt(surat: Surat) = corouTine.launch { repository.updateSrt(surat) }
-    fun deleteSrt(surat: Surat) = corouTine.launch { repository.deleteSrt(surat) }
+    fun insertSrt(surat: Surat) = coroutine.launch { repository.insertSrt(surat) }
+    fun updateSrt(surat: Surat) = coroutine.launch { repository.updateSrt(surat) }
+    fun deleteSrt(surat: Surat) = coroutine.launch { repository.deleteSrt(surat) }
 
 //    get data surat
     fun getAllSurat() = repository.getAllSurat()
@@ -36,7 +36,7 @@ class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
     fun getFilteredWithJenis(divisi: String, tanggal: String, jenis: String) = repository.getFilteredWithJenis(divisi, tanggal, jenis)
 
 //    get jumlah data
-    fun getJumlahByJenis(jenis: String) = repository.getJumlahByJenis(jenis)
+    private fun getJumlahByJenis(jenis: String) = repository.getJumlahByJenis(jenis)
     fun getJumlahDivisiByJenis(divisi: String, jenis: String) = repository.getJumlahDivisiByJenis(divisi, jenis)
 
 //    jumlah data jenis(masuk/keluar)
@@ -64,6 +64,7 @@ class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
         }
     }
 
+//    set data pieChart keluar
     private val jumlahDataDivisiKeluar = divisi.drop(1).map {
         getJumlahDivisiByJenis(divisi[divisi.indexOf(it)], keluar)
     }
