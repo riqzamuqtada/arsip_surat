@@ -1,14 +1,14 @@
-package com.kospin.myapplication.model
+package com.kospin.arsipsurat.model
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import com.kospin.myapplication.MainActivity
-import com.kospin.myapplication.R
-import com.kospin.myapplication.databinding.ActivityLoginBinding
-import com.kospin.myapplication.utils.PublicFunction
+import com.kospin.arsipsurat.MainActivity
+import com.kospin.arsipsurat.R
+import com.kospin.arsipsurat.databinding.ActivityLoginBinding
+import com.kospin.arsipsurat.utils.PublicFunction
 
 class LoginActivity : AppCompatActivity() {
 

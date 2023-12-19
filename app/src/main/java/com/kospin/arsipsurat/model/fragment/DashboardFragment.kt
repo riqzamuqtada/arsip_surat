@@ -1,4 +1,4 @@
-package com.kospin.myapplication.model.fragment
+package com.kospin.arsipsurat.model.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
@@ -26,11 +24,14 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.kospin.myapplication.R
-import com.kospin.myapplication.model.LoginActivity
-import com.kospin.myapplication.databinding.FragmentDashboardBinding
-import com.kospin.myapplication.utils.PublicFunction
-import com.kospin.myapplication.viewmodel.SuratViewModel
+import com.kospin.arsipsurat.R
+import com.kospin.arsipsurat.model.LoginActivity
+import com.kospin.arsipsurat.databinding.FragmentDashboardBinding
+import com.kospin.arsipsurat.utils.PublicFunction
+import com.kospin.arsipsurat.viewmodel.SuratViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 
 class DashboardFragment : Fragment() {
@@ -108,7 +109,10 @@ class DashboardFragment : Fragment() {
         builder.setMessage("Apakah Anda yakin ingin keluar dari akun Anda? Keluar akan mengakhiri sesi.")
 
         builder.setPositiveButton("Hapus"){ dialog, _ ->
-         deleteAllTemporaryFiles()
+            CoroutineScope(Dispatchers.Main).launch {
+                deleteAllTemporaryFiles()
+                PublicFunction.alert("selesai", requireContext())
+            }
         }
 
         builder.setNegativeButton("Batal"){ dialog, _ ->

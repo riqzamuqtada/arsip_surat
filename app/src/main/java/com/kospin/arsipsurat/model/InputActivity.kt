@@ -1,4 +1,4 @@
-package com.kospin.myapplication.model
+package com.kospin.arsipsurat.model
 
 import android.app.Activity
 import android.content.Context
@@ -19,12 +19,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.github.chrisbanes.photoview.BuildConfig
-import com.kospin.myapplication.R
-import com.kospin.myapplication.roomdb.Surat
-import com.kospin.myapplication.databinding.ActivityInputBinding
-import com.kospin.myapplication.utils.DatePicker
-import com.kospin.myapplication.utils.PublicFunction
-import com.kospin.myapplication.viewmodel.SuratViewModel
+import com.kospin.arsipsurat.R
+import com.kospin.arsipsurat.roomdb.Surat
+import com.kospin.arsipsurat.databinding.ActivityInputBinding
+import com.kospin.arsipsurat.utils.DatePicker
+import com.kospin.arsipsurat.utils.PublicFunction
+import com.kospin.arsipsurat.viewmodel.SuratViewModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -266,7 +266,7 @@ class InputActivity : AppCompatActivity() {
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         this,
-                        "${BuildConfig.APPLICATION_ID}.fileprovider1",
+                        "${BuildConfig.APPLICATION_ID}.provider_file_arsip_surat",
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)

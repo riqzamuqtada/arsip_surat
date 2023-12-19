@@ -1,4 +1,4 @@
-package com.kospin.myapplication.roomdb
+package com.kospin.arsipsurat.roomdb
 
 import android.content.Context
 import androidx.room.Database

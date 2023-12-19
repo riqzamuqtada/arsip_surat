@@ -1,9 +1,9 @@
-package com.kospin.myapplication.viewmodel
+package com.kospin.arsipsurat.viewmodel
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.github.mikephil.charting.data.PieEntry
-import com.kospin.myapplication.roomdb.Surat
+import com.kospin.arsipsurat.roomdb.Surat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

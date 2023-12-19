@@ -44,7 +44,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.github.chrisbanes.photoview.fileprovider1"
+            android:authorities="com.github.chrisbanes.photoview.provider_file_arsip_surat"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

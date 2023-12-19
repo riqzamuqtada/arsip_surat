@@ -1,12 +1,12 @@
-package com.kospin.myapplication.utils
+package com.kospin.arsipsurat.utils
 
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
-import com.kospin.myapplication.roomdb.DbArsipSurat
-import com.kospin.myapplication.viewmodel.SuratRepository
-import com.kospin.myapplication.viewmodel.SuratViewModel
-import com.kospin.myapplication.viewmodel.SuratViewModelFactory
+import com.kospin.arsipsurat.roomdb.DbArsipSurat
+import com.kospin.arsipsurat.viewmodel.SuratRepository
+import com.kospin.arsipsurat.viewmodel.SuratViewModel
+import com.kospin.arsipsurat.viewmodel.SuratViewModelFactory
 
 object PublicFunction {
 

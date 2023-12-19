@@ -1,7 +1,7 @@
-package com.kospin.myapplication.viewmodel
+package com.kospin.arsipsurat.viewmodel
 
-import com.kospin.myapplication.roomdb.DbArsipSurat
-import com.kospin.myapplication.roomdb.Surat
+import com.kospin.arsipsurat.roomdb.DbArsipSurat
+import com.kospin.arsipsurat.roomdb.Surat
 
 class SuratRepository(private val db: DbArsipSurat) {
 

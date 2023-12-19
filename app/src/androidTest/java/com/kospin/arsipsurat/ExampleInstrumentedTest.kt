@@ -1,4 +1,4 @@
-package com.kospin.myapplication
+package com.kospin.arsipsurat
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

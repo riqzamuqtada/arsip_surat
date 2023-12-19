@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.kospin.myapplication'
+    namespace 'com.kospin.arsipsurat'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.kospin.myapplication"
+        applicationId "com.kospin.arsipsurat"
         minSdk 24
         targetSdk 33
         versionCode 1

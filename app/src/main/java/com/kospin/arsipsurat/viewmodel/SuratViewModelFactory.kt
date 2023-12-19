@@ -1,4 +1,4 @@
-package com.kospin.myapplication.viewmodel
+package com.kospin.arsipsurat.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

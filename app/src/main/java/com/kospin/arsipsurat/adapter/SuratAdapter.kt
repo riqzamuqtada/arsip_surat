@@ -1,4 +1,4 @@
-package com.kospin.myapplication.adapter
+package com.kospin.arsipsurat.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.kospin.myapplication.model.DetailActivity
-import com.kospin.myapplication.model.InputActivity
-import com.kospin.myapplication.R
-import com.kospin.myapplication.databinding.AdapterSuratBinding
-import com.kospin.myapplication.utils.PublicFunction
-import com.kospin.myapplication.viewmodel.SuratViewModel
+import com.kospin.arsipsurat.model.DetailActivity
+import com.kospin.arsipsurat.model.InputActivity
+import com.kospin.arsipsurat.R
+import com.kospin.arsipsurat.databinding.AdapterSuratBinding
+import com.kospin.arsipsurat.utils.PublicFunction
+import com.kospin.arsipsurat.viewmodel.SuratViewModel
 
 class SuratAdapter(private val list: ArrayList<DataAdapterSurat>,private val viewModel: SuratViewModel) : RecyclerView.Adapter<SuratAdapter.ViewHolder>(){
     class ViewHolder(private val find: AdapterSuratBinding) : RecyclerView.ViewHolder(find.root) {

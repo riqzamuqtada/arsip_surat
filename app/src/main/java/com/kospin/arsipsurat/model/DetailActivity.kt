@@ -1,13 +1,13 @@
-package com.kospin.myapplication.model
+package com.kospin.arsipsurat.model
 
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.kospin.myapplication.R
-import com.kospin.myapplication.roomdb.DbArsipSurat
-import com.kospin.myapplication.databinding.ActivityDetailBinding
+import com.kospin.arsipsurat.R
+import com.kospin.arsipsurat.roomdb.DbArsipSurat
+import com.kospin.arsipsurat.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
 

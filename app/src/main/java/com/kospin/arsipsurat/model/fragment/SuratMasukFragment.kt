@@ -1,4 +1,4 @@
-package com.kospin.myapplication.model.fragment
+package com.kospin.arsipsurat.model.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -12,13 +12,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kospin.myapplication.R
-import com.kospin.myapplication.adapter.DataAdapterSurat
-import com.kospin.myapplication.adapter.SuratAdapter
-import com.kospin.myapplication.databinding.FragmentSuratMasukBinding
-import com.kospin.myapplication.utils.DatePicker
-import com.kospin.myapplication.utils.PublicFunction
-import com.kospin.myapplication.viewmodel.SuratViewModel
+import com.kospin.arsipsurat.R
+import com.kospin.arsipsurat.adapter.DataAdapterSurat
+import com.kospin.arsipsurat.adapter.SuratAdapter
+import com.kospin.arsipsurat.databinding.FragmentSuratMasukBinding
+import com.kospin.arsipsurat.utils.DatePicker
+import com.kospin.arsipsurat.utils.PublicFunction
+import com.kospin.arsipsurat.viewmodel.SuratViewModel
 
 class SuratMasukFragment : Fragment() {
     // TODO: Rename and change types of parameters

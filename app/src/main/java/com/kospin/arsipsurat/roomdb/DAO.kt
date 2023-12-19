@@ -1,4 +1,4 @@
-package com.kospin.myapplication.roomdb
+package com.kospin.arsipsurat.roomdb
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,7 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.kospin.myapplication.adapter.DataAdapterSurat
+import com.kospin.arsipsurat.adapter.DataAdapterSurat
 
 @Dao
 interface DAO {
