@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -193,6 +192,7 @@ class InputActivity : AppCompatActivity() {
                 foto
             )
         )
+        deleteTempFiles()
         PublicFunction.alert("Data Arsip Surat berhasil ditambahkan!", this)
         onBackPressed()
     }
@@ -210,9 +210,29 @@ class InputActivity : AppCompatActivity() {
                 foto
             )
         )
+        deleteTempFiles()
         PublicFunction.alert("Data Arsip Surat berhasil diubah!", this)
         onBackPressed()
     }
+
+    private fun deleteTempFiles() {
+        // Hapus file temporer yang dibuat untuk gambar yang diambil dari kamera
+        currentPhotoPath?.let { path ->
+            val photoFile = File(path)
+            if (photoFile.exists()) {
+                photoFile.delete()
+            }
+        }
+
+        // Hapus file temporer yang dibuat untuk gambar yang dipilih dari galeri
+        currentPickedImagePath?.let { path ->
+            val pickedImageFile = File(path)
+            if (pickedImageFile.exists()) {
+                pickedImageFile.delete()
+            }
+        }
+    }
+
 
     private fun setupSpinner(spinner: Spinner, data: Array<String>, opsi: Int){
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, data)
@@ -287,7 +307,6 @@ class InputActivity : AppCompatActivity() {
                     // Lakukan sesuatu dengan currentPhotoPath
                     val imgCompres = compressImageToByteArray(currentPhotoPath!!, this)
                     foto = imgCompres
-                    Log.d("foto path", data?.data.toString())
 
                     find.tvInputFoto.text = File(currentPhotoPath).name
                 }

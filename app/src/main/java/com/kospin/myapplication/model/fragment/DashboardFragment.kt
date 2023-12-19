@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,7 @@ import com.kospin.myapplication.model.LoginActivity
 import com.kospin.myapplication.databinding.FragmentDashboardBinding
 import com.kospin.myapplication.utils.PublicFunction
 import com.kospin.myapplication.viewmodel.SuratViewModel
+import java.io.File
 
 class DashboardFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -52,8 +54,7 @@ class DashboardFragment : Fragment() {
         val username = sheredPreferences.getString("username", null)
         find.tvDashboardUsername.setText(username.toString())
 
-        val menuButton = find.btnDashboardMenu
-        menuButton.setOnClickListener { showPopupMenu(menuButton) }
+        find.btnDashboardMenu.setOnClickListener { showPopupMenu() }
 
 //        pieChart jenis surat
         viewModel().dataPieJenis.observe(viewLifecycleOwner, Observer { data ->
@@ -72,8 +73,8 @@ class DashboardFragment : Fragment() {
 
     }
 
-    private fun showPopupMenu(view: View) {
-        val popupMenu = PopupMenu(requireContext(), view)
+    private fun showPopupMenu() {
+        val popupMenu = PopupMenu(requireContext(), find.btnDashboardMenu)
         popupMenu.menuInflater.inflate(R.menu.dashboard_menu_options, popupMenu.menu)
 
         // Set listener untuk menangani item yang dipilih
@@ -85,6 +86,7 @@ class DashboardFragment : Fragment() {
                 }
                 R.id.menu_clear_trash -> {
                     // Lakukan aksi untuk "Hapus Sampah"
+                    dialogDelete()
                     true
                 }
                 R.id.menu_logout -> {
@@ -97,6 +99,48 @@ class DashboardFragment : Fragment() {
 
         popupMenu.show()
     }
+
+    private fun dialogDelete() {
+
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Konfirmasi Logout")
+        builder.setMessage("Apakah Anda yakin ingin keluar dari akun Anda? Keluar akan mengakhiri sesi.")
+
+        builder.setPositiveButton("Hapus"){ dialog, _ ->
+         deleteAllTemporaryFiles()
+        }
+
+        builder.setNegativeButton("Batal"){ dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = builder.create()
+
+        alertDialog.show()
+
+        val positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+        val negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
+        positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.clr_red))
+        negativeButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_hard))
+
+    }
+
+    private fun deleteAllTemporaryFiles() {
+        val storageDir: File = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES) ?: return
+
+        // Filter file yang memiliki nama yang sesuai dengan pola file temporer
+        val temporaryFiles = storageDir.listFiles { file ->
+            file.name.startsWith("JPEG_") && file.name.endsWith(".jpg")
+        }
+
+        // Hapus semua file temporer
+        temporaryFiles?.forEach { file ->
+            file.delete()
+        }
+    }
+
 
     private fun logout(){
         val builder = AlertDialog.Builder(requireContext())
