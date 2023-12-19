@@ -3,12 +3,14 @@ package com.kospin.myapplication.model.fragment
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
@@ -16,9 +18,13 @@ import androidx.lifecycle.Observer
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.kospin.myapplication.R
 import com.kospin.myapplication.model.LoginActivity
 import com.kospin.myapplication.databinding.FragmentDashboardBinding
@@ -133,8 +139,9 @@ class DashboardFragment : Fragment() {
         val mainBlue    = ContextCompat.getColor(requireContext(), R.color.main_blue_dark)
         val mainWhite   = ContextCompat.getColor(requireContext(), R.color.main_white_dark)
 
+        val colors      = listOf(mainBlue, mainWhite)
         dataSet.setDrawValues(false)
-        dataSet.colors = listOf(mainBlue, mainWhite)
+        dataSet.colors = colors
 
         pieChart.data = PieData(dataSet)
         pieChart.invalidate()
@@ -151,6 +158,24 @@ class DashboardFragment : Fragment() {
         legend.orientation = Legend.LegendOrientation.VERTICAL
         legend.textColor = Color.WHITE
 
+        pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(e: Entry?, h: Highlight?) {
+                // Potongan dipilih, tampilkan nilai
+                val index = entries.indexOf(e as PieEntry)
+                val selectedColor = colors[index % colors.size]
+                val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                pieChart.setCenterTextTypeface(boldTypeface)
+                pieChart.centerText = "${e.y.toInt()}"
+                pieChart.setCenterTextColor(selectedColor)
+                pieChart.setCenterTextSize(16f)
+            }
+
+            override fun onNothingSelected() {
+                // Potongan tidak dipilih, sembunyikan nilai
+                pieChart.centerText = ""
+            }
+        })
+
         pieChart.invalidate()
     }
 
@@ -164,8 +189,18 @@ class DashboardFragment : Fragment() {
         val rnbwYellow  = ContextCompat.getColor(requireContext(), R.color.rnbw_yellow)
         val rnbwOrange  = ContextCompat.getColor(requireContext(), R.color.rnbw_orange)
 
+        val colors = listOf(rnbwGreen, rnbwBlue, rnbwRed, rnbwPurple, rnbwYellow, rnbwOrange)
+
         dataSet.setDrawValues(false)
-        dataSet.colors = listOf(rnbwGreen, rnbwBlue, rnbwRed, rnbwPurple, rnbwYellow, rnbwOrange)
+        dataSet.selectionShift = 6f
+        dataSet.valueTextColor = Color.WHITE
+        dataSet.valueTextSize = 14f
+        dataSet.valueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                return value.toInt().toString()
+            }
+        }
+        dataSet.colors = colors
 
         val data = PieData(dataSet)
         pieChart.data = data
@@ -181,6 +216,24 @@ class DashboardFragment : Fragment() {
         legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         legend.orientation = Legend.LegendOrientation.VERTICAL
         legend.textColor = Color.WHITE
+
+        pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(e: Entry?, h: Highlight?) {
+                // Potongan dipilih, tampilkan nilai
+                val index = entries.indexOf(e as PieEntry)
+                val selectedColor = colors[index % colors.size]
+                val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                pieChart.setCenterTextTypeface(boldTypeface)
+                pieChart.centerText = "${e.y.toInt()}"
+                pieChart.setCenterTextColor(selectedColor)
+                pieChart.setCenterTextSize(16f)
+            }
+
+            override fun onNothingSelected() {
+                // Potongan tidak dipilih, sembunyikan nilai
+                pieChart.centerText = ""
+            }
+        })
 
         pieChart.invalidate()
     }
