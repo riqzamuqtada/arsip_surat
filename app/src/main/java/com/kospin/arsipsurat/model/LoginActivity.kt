@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import com.kospin.arsipsurat.MainActivity
+import com.kospin.arsipsurat.model.MainActivity
 import com.kospin.arsipsurat.R
 import com.kospin.arsipsurat.databinding.ActivityLoginBinding
 import com.kospin.arsipsurat.utils.PublicFunction

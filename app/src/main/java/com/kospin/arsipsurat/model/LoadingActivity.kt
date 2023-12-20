@@ -1,11 +1,11 @@
-package com.kospin.arsipsurat
+package com.kospin.arsipsurat.model
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.core.content.ContextCompat
-import com.kospin.arsipsurat.model.LoginActivity
+import com.kospin.arsipsurat.R
 
 class LoadingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

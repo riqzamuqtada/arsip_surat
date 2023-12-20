@@ -1,4 +1,4 @@
-package com.kospin.arsipsurat
+package com.kospin.arsipsurat.model
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import com.kospin.arsipsurat.R
 import com.kospin.arsipsurat.databinding.ActivityMainBinding
-import com.kospin.arsipsurat.model.InputActivity
 
 class MainActivity : AppCompatActivity() {
 
