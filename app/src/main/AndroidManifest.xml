@@ -31,6 +31,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".model.AboutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".model.LoadingActivity"
             android:exported="true"
             android:screenOrientation="portrait" >
