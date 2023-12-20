@@ -8,4 +8,31 @@
     <string name="empty_data_desc">Tidak ada data yang tersedia untuk ditampilkan di sini. Tambahkan data untuk melihatnya.</string>
     <string name="notfound_data_label">Oops!</string>
     <string name="notfound_data_desc">Tidak ada hasil untuk pencarian Anda. Silahkan periksa kembali kata kunci Anda.</string>
+
+    <!--  About App  -->
+    <string name="dev1_name">Muh Riqza Muqtada</string>
+    <string name="dev2_name">Fithnan Ri’atan</string>
+    <string name="dev3_name">Hafshoh Nailal Izza</string>
+    <string name="dev4_name">Essa Citra Adelia</string>
+    <string name="dev1_job"><![CDATA[System Analyst &\nBackend Developer]]></string>
+    <string name="dev2_job"><![CDATA[UI UX Designer &\nFrontend Developer]]></string>
+    <string name="dev3_job"><![CDATA[Quality Assurance &\nTechnical Writer]]></string>
+    <string name="dev4_job"><![CDATA[Quality Assurance &\nTechnical Writer]]></string>
+    <string name="about_title_tim">Tim Pengembang</string>
+    <string name="about_title_diclaimer">Disclaimer</string>
+    <string name="about_title_privacy">Kebijakan Privasi</string>
+    <string name="about_title_support">Dukungan</string>
+    <string name="about_title_credits">Credits</string>
+    <string name="about_desc">ArsipSurat adalah aplikasi mobile yang dirancang untuk memudahkan penyimpanan dan pengelolaan arsip surat pada perusahaan Kospin Jasa. Dibuat dengan dedikasi oleh tim siswa magang dari SMK Syafi\'i Akrom, kami berkomitmen untuk menyediakan solusi yang efisien dan handal bagi kebutuhan arsip surat perusahaan Anda.</string>
+    <string name="about_desc_disclaimer">Aplikasi ini disediakan tanpa jaminan apapun. Penggunaan aplikasi ini sepenuhnya menjadi tanggung jawab pengguna.</string>
+    <string name="about_desc_privacy">ArsipSurat tidak mengumpulkan data pribadi pengguna. Semua informasi yang dimasukkan dan disimpan dalam aplikasi ini sepenuhnya milik perusahaan Kospin Jasa. Aplikasi ini tidak menggunakan cookie atau teknologi pelacakan serupa.</string>
+    <string name="about_desc_support">Jika Anda mengalami masalah atau memiliki pertanyaan, jangan ragu untuk menghubungi kami.</string>
+    <string name="about_credits_title_list1">●  Flaticon dan Unicons(Figma Community)</string>
+    <string name="about_credits_title_list2">●  Undraw</string>
+    <string name="about_credits_title_list3">●  ChatGPT</string>
+    <string name="about_credits_title_list4">●  Pembimbing dari Pihak Kospin Jasa</string>
+    <string name="about_credits_desc_list1">Terima kasih kepada Flaticon dan Unicons dari Figma Community sebagai penyedia ikon dan vektor yang mempercantik tampilan aplikasi ini.</string>
+    <string name="about_credits_desc_list2">Gambar ilustrasi dalam aplikasi ini disediakan oleh Undraw, yang telah memberikan sentuhan visual yang kreatif dan mendalam.</string>
+    <string name="about_credits_desc_list3">Kami mengapresiasi kontribusi dari ChatGPT sebagai sumber daya yang kami andalkan untuk mendapatkan informasi dan solusi terkait pengembangan perangkat lunak.</string>
+    <string name="about_credits_desc_list4">Kami mengucapkan terima kasih kepada pembimbing dari Pihak Kospin Jasa atas dukungan dan bimbingan mereka selama pengembangan aplikasi ini. Kontribusi mereka dalam memastikan aplikasi ini memenuhi kebutuhan perusahaan dengan sebaik-baiknya.</string>
 </resources>

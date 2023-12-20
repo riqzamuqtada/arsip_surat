@@ -27,6 +27,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.kospin.arsipsurat.R
 import com.kospin.arsipsurat.model.LoginActivity
 import com.kospin.arsipsurat.databinding.FragmentDashboardBinding
+import com.kospin.arsipsurat.model.AboutActivity
 import com.kospin.arsipsurat.utils.PublicFunction
 import com.kospin.arsipsurat.viewmodel.SuratViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -83,6 +84,7 @@ class DashboardFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.menu_about_app -> {
                     // Lakukan aksi untuk "Tentang App"
+                    aboutappPage()
                     true
                 }
                 R.id.menu_clear_trash -> {
@@ -99,6 +101,11 @@ class DashboardFragment : Fragment() {
         }
 
         popupMenu.show()
+    }
+
+    private fun aboutappPage() {
+        val intent = Intent(activity, AboutActivity::class.java)
+        startActivity(intent)
     }
 
     private fun dialogDelete() {
