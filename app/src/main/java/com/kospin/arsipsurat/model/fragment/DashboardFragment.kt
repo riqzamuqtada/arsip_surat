@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.ActivityNavigatorExtras
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -112,13 +113,13 @@ class DashboardFragment : Fragment() {
 
         val builder = AlertDialog.Builder(requireContext())
 
-        builder.setTitle("Konfirmasi Logout")
-        builder.setMessage("Apakah Anda yakin ingin keluar dari akun Anda? Keluar akan mengakhiri sesi.")
+        builder.setTitle("Konfirmasi Hapus Sampah")
+        builder.setMessage("Apakah Anda yakin ingin menghapus sampah dan membersihkan cache? Tindakan ini akan membebaskan ruang penyimpanan.")
 
-        builder.setPositiveButton("Hapus"){ dialog, _ ->
+        builder.setPositiveButton("Hapus dan Bersihkan"){ dialog, _ ->
             CoroutineScope(Dispatchers.Main).launch {
                 deleteAllTemporaryFiles()
-                PublicFunction.alert("selesai", requireContext())
+                PublicFunction.alert("Cache dan sampah telah berhasil dihapus. Ruang penyimpanan kini lebih optimal. \uD83D\uDE80", requireContext())
             }
         }
 
@@ -165,6 +166,7 @@ class DashboardFragment : Fragment() {
             sheredPreferences.edit().clear().apply()
             requireActivity().finish()
             dialog.dismiss()
+            PublicFunction.alert("Logout Berhasil! Sampai jumpa lagi. \uD83D\uDC4B", requireContext())
         }
 
         builder.setNegativeButton("Batal"){ dialog, _ ->

@@ -34,12 +34,12 @@ class LoginActivity : AppCompatActivity() {
                     val sheredPreferences = getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
                     sheredPreferences.edit().putString("username", inputUsername.text.toString()).apply()
                     finish()
-                    PublicFunction.alert("Selamat Datang ${inputUsername.text}!", this)
+                    PublicFunction.alert("Login Berhasil! Selamat datang ${inputUsername.text} \uD83C\uDF89", this)
                 } else{
-                    PublicFunction.alert("Username dan Password salah!", this)
+                    PublicFunction.alert("Username atau Password salah!", this)
                 }
             } else {
-                PublicFunction.alert("Username dan Password tidak boleh Kosong!", this)
+                PublicFunction.alert("Username atau Password tidak boleh Kosong!", this)
             }
         }
     }
