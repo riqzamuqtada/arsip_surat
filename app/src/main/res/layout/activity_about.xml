@@ -154,7 +154,7 @@
                                         android:layout_marginBottom="16dp"
                                         android:adjustViewBounds="true"
                                         android:scaleType="centerCrop"
-                                        app:srcCompat="@drawable/pp_1" />
+                                        app:srcCompat="@drawable/dev1_pp_v1" />
 
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
@@ -246,7 +246,7 @@
                                         android:layout_marginBottom="16dp"
                                         android:adjustViewBounds="true"
                                         android:scaleType="centerCrop"
-                                        app:srcCompat="@drawable/pp_2" />
+                                        app:srcCompat="@drawable/dev2_pp_v1" />
 
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
@@ -351,7 +351,7 @@
                                         android:layout_marginBottom="16dp"
                                         android:adjustViewBounds="true"
                                         android:scaleType="centerCrop"
-                                        app:srcCompat="@drawable/pp_3" />
+                                        app:srcCompat="@drawable/dev3_pp_v1" />
 
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
@@ -443,7 +443,7 @@
                                         android:layout_marginBottom="16dp"
                                         android:adjustViewBounds="true"
                                         android:scaleType="centerCrop"
-                                        app:srcCompat="@drawable/pp_4" />
+                                        app:srcCompat="@drawable/dev4_pp_v1" />
 
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>

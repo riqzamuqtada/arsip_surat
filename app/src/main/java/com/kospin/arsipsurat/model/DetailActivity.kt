@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import com.kospin.arsipsurat.R
 import com.kospin.arsipsurat.roomdb.DbArsipSurat
@@ -47,14 +48,19 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
 
+        val scaleUp     = AnimationUtils.loadAnimation(this, R.anim.scale_up)
+        val scaleDown   = AnimationUtils.loadAnimation(this, R.anim.scale_down)
+
 //        fungsi button
         find.btnDetailBack.setOnClickListener {
             onBackPressed()
         }
         find.imgDetailSurat.setOnClickListener {
+            find.lyFotoZoom.startAnimation(scaleUp)
             find.lyFotoZoom.visibility = View.VISIBLE
         }
         find.btnZoomBack.setOnClickListener {
+            find.lyFotoZoom.startAnimation(scaleDown)
             onBackPressed()
         }
 
