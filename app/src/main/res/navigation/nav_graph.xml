@@ -10,6 +10,15 @@
         android:name="com.kospin.arsipsurat.model.fragment.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/toSuratMasuk"
+            app:destination="@id/suratMasukFragment" />
+        <action
+            android:id="@+id/toSuratKeluar"
+            app:destination="@id/suratKeluarFragment" />
+        <action
+            android:id="@+id/toAllSurat"
+            app:destination="@id/allSuratFragment" />
     </fragment>
     <fragment
         android:id="@+id/allSuratFragment"

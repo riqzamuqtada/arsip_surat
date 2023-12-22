@@ -161,7 +161,7 @@ class InputActivity : AppCompatActivity() {
         val data = viewModel().getById(id)
 
         find.btnInputInsert.visibility = View.GONE
-        find.tvFormTitle.setText("Update Arsip Surat")
+        find.tvFormTitle.setText("Edit Arsip Surat")
         find.etInputNomor.setText(data.no_surat)
         find.etInputHal.setText(data.hal)
         find.tvInputTanggal.setText(data.tanggal)

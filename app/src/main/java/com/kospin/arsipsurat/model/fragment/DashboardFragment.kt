@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
@@ -15,6 +16,9 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.ActivityNavigatorExtras
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -53,11 +57,28 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
-        val username = sheredPreferences.getString("username", null)
-        find.tvDashboardUsername.setText(username.toString())
+        viewModel().username.observe(viewLifecycleOwner, Observer {
+            find.tvDashboardUsername.setText(it)
+        })
 
         find.btnDashboardMenu.setOnClickListener { showPopupMenu() }
+
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.fade_in)
+            .setExitAnim(R.anim.fade_out)
+            .build()
+        find.btnToSrtMasuk.setOnClickListener {
+            findNavController().navigate(R.id.toSuratMasuk, null, navOptions)
+            viewModel().setIdFragment(R.id.suratMasukFragment)
+        }
+        find.btnToSrtKeluar.setOnClickListener {
+            findNavController().navigate(R.id.toSuratKeluar, null, navOptions)
+            viewModel().setIdFragment(R.id.suratKeluarFragment)
+        }
+        find.btnToAllSrt.setOnClickListener {
+            findNavController().navigate(R.id.toAllSurat, null, navOptions)
+            viewModel().setIdFragment(R.id.allSuratFragment)
+        }
 
 //        pieChart jenis surat
         viewModel().dataPieJenis.observe(viewLifecycleOwner, Observer { data ->
@@ -100,8 +121,8 @@ class DashboardFragment : Fragment() {
                 else -> false
             }
         }
-
         popupMenu.show()
+
     }
 
     private fun aboutappPage() {
@@ -119,6 +140,7 @@ class DashboardFragment : Fragment() {
         builder.setPositiveButton("Hapus dan Bersihkan"){ dialog, _ ->
             CoroutineScope(Dispatchers.Main).launch {
                 deleteAllTemporaryFiles()
+                clearAppCache(requireContext())
                 PublicFunction.alert("Cache dan sampah telah berhasil dihapus. Ruang penyimpanan kini lebih optimal. \uD83D\uDE80", requireContext())
             }
         }
@@ -137,6 +159,38 @@ class DashboardFragment : Fragment() {
         positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.clr_red))
         negativeButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_hard))
 
+    }
+    private fun clearAppCache(context: Context) {
+        try {
+            val cacheDir = context.cacheDir
+            val cacheDirectory = File(cacheDir.path)
+
+            if (cacheDirectory.exists()) {
+                deleteDir(cacheDirectory)
+            }
+
+            context.externalCacheDir?.let { externalCacheDir ->
+                val externalCacheDirectory = File(externalCacheDir.path)
+                if (externalCacheDirectory.exists()) {
+                    deleteDir(externalCacheDirectory)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun deleteDir(dir: File): Boolean {
+        if (dir.isDirectory) {
+            val children = dir.list()
+            for (i in children.indices) {
+                val success = deleteDir(File(dir, children[i]))
+                if (!success) {
+                    return false
+                }
+            }
+        }
+        return dir.delete()
     }
 
     private fun deleteAllTemporaryFiles() {
@@ -161,12 +215,10 @@ class DashboardFragment : Fragment() {
         builder.setMessage("Apakah Anda yakin ingin keluar dari akun Anda? Keluar akan mengakhiri sesi.")
 
         builder.setPositiveButton("Logout"){ dialog, _ ->
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-            val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
-            sheredPreferences.edit().clear().apply()
-            requireActivity().finish()
             dialog.dismiss()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
             PublicFunction.alert("Logout Berhasil! Sampai jumpa lagi. \uD83D\uDC4B", requireContext())
+            requireActivity().finish()
         }
 
         builder.setNegativeButton("Batal"){ dialog, _ ->
@@ -193,7 +245,7 @@ class DashboardFragment : Fragment() {
         val pieChart = find.cpSuratAll
         val dataSet = PieDataSet(entries, null)
 
-        val mainBlue    = ContextCompat.getColor(requireContext(), R.color.main_blue_dark)
+        val mainBlue    = ContextCompat.getColor(requireContext(), R.color.main_blue_light)
         val mainWhite   = ContextCompat.getColor(requireContext(), R.color.main_white_dark)
 
         val colors      = listOf(mainBlue, mainWhite)
@@ -245,8 +297,9 @@ class DashboardFragment : Fragment() {
         val rnbwPurple  = ContextCompat.getColor(requireContext(), R.color.rnbw_purple)
         val rnbwYellow  = ContextCompat.getColor(requireContext(), R.color.rnbw_yellow)
         val rnbwOrange  = ContextCompat.getColor(requireContext(), R.color.rnbw_orange)
+        val mainWhite   = ContextCompat.getColor(requireContext(), R.color.main_white_dark)
 
-        val colors = listOf(rnbwGreen, rnbwBlue, rnbwRed, rnbwPurple, rnbwYellow, rnbwOrange)
+        val colors = listOf(rnbwGreen, rnbwBlue, rnbwRed, rnbwPurple, rnbwYellow, rnbwOrange, Color.BLACK, mainWhite)
 
         dataSet.setDrawValues(false)
         dataSet.selectionShift = 6f

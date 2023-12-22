@@ -1,8 +1,11 @@
 package com.kospin.arsipsurat.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.mikephil.charting.data.PieEntry
+import com.kospin.arsipsurat.adapter.DataAdapterSurat
 import com.kospin.arsipsurat.roomdb.Surat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,8 +17,22 @@ class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
     private val masuk = "Masuk"
     private val keluar = "Keluar"
 
+    private val _idFromFragment = MutableLiveData<Int>()
+    val idFromFragment: LiveData<Int>
+        get() = _idFromFragment
+    fun setIdFragment(value: Int) {
+        _idFromFragment.value = value
+    }
+
+    private val _username = MutableLiveData<String>()
+    val username: LiveData<String>
+        get() = _username
+    fun setUsername(value: String) {
+        _username.value = value
+    }
+
 //    data divisi
-    val divisi: Array<String> = arrayOf("unit/divisi", "Pengurus", "Kesekretariatan", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional")
+    val divisi: Array<String> = arrayOf("unit/divisi", "Pengurus", "Kesekretariatan", "Div. Pinjaman", "Div. Dana", "Div. Pengawasan", "Div. Operasional", "Internal IT", "Lainnya")
 
 //    edit data surat
     fun insertSrt(surat: Surat) = coroutine.launch { repository.insertSrt(surat) }
@@ -23,7 +40,7 @@ class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
     fun deleteSrt(surat: Surat) = coroutine.launch { repository.deleteSrt(surat) }
 
 //    get data surat
-    fun getAllSurat() = repository.getAllSurat()
+    val getAllSurat = repository.getAllSurat()
     fun getJenisSrtNoFoto(jenis: String) = repository.getJenisSrtNoFoto(jenis)
     fun getById(id: Int) = repository.getById(id)
     fun cariSurat(key: String) = repository.cariSurat(key)

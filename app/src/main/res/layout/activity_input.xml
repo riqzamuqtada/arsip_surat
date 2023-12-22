@@ -266,7 +266,7 @@
                     android:background="@drawable/btn_action_form_surat"
                     android:elevation="6dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Save"
+                    android:text="Simpan"
                     android:textColor="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -276,7 +276,7 @@
                     android:background="@drawable/btn_action_form_surat"
                     android:elevation="6dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Update"
+                    android:text="Ubah"
                     android:textColor="@color/white" />
 
             </LinearLayout>

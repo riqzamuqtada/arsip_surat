@@ -41,9 +41,9 @@ class AllSuratFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //        set username
-        val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
-        val username = sheredPreferences.getString("username", null)
-        find.tvUsername.setText(username.toString())
+        viewModel().username.observe(viewLifecycleOwner, Observer {
+            find.tvUsername.setText(it.toString())
+        })
 
 //        adapter
         adapter = SuratAdapter(arrayListOf(), viewModel())
@@ -168,7 +168,7 @@ class AllSuratFragment : Fragment() {
     }
 
     private fun tampilData(){
-        val data = viewModel().getAllSurat()
+        val data = viewModel().getAllSurat
         data.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
             showNotif(it, true)
