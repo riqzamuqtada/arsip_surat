@@ -67,7 +67,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="120dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:minHeight="120dp"
@@ -110,7 +110,7 @@
 
                 <Button
                     android:id="@+id/btnToAllSrt"
-                    android:layout_width="160dp"
+                    android:layout_width="190dp"
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +124,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSrtMasuk"
             android:layout_width="0dp"
-            android:layout_height="190dp"
+            android:layout_height="185dp"
             android:clickable="true"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
@@ -196,7 +196,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSrtKeluar"
             android:layout_width="0dp"
-            android:layout_height="190dp"
+            android:layout_height="185dp"
             android:minHeight="140dp"
             app:cardBackgroundColor="@color/main_blue_dark"
             app:cardCornerRadius="12dp"

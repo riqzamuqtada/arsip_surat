@@ -53,6 +53,7 @@ class SuratViewModel(private val repository: SuratRepository) : ViewModel() {
     fun getFilteredWithJenis(divisi: String, tanggal: String, jenis: String) = repository.getFilteredWithJenis(divisi, tanggal, jenis)
 
 //    get jumlah data
+    val getJumlahSurat = repository.getJumlahSurat()
     private fun getJumlahByJenis(jenis: String) = repository.getJumlahByJenis(jenis)
     fun getJumlahDivisiByJenis(divisi: String, jenis: String) = repository.getJumlahDivisiByJenis(divisi, jenis)
 

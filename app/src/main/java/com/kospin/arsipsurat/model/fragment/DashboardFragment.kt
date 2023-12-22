@@ -8,16 +8,13 @@ import android.os.Bundle
 import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -87,12 +84,12 @@ class DashboardFragment : Fragment() {
 
 //        pieChart surat masuk
         viewModel().dataPieMasuk.observe(viewLifecycleOwner, Observer { data ->
-            setChartBlue(find.cpSuratMasuk, data)
+            setChartBlue(true, data)
         })
 
 //        pieChart surat keluar
         viewModel().dataPieKeluar.observe(viewLifecycleOwner, Observer { data ->
-            setChartBlue(find.cpSuratKeluar, data)
+            setChartBlue(false, data)
         })
 
     }
@@ -245,8 +242,9 @@ class DashboardFragment : Fragment() {
         val pieChart = find.cpSuratAll
         val dataSet = PieDataSet(entries, null)
 
-        val mainBlue    = ContextCompat.getColor(requireContext(), R.color.main_blue_light)
+        val mainBlue    = ContextCompat.getColor(requireContext(), R.color.main_blue_dark)
         val mainWhite   = ContextCompat.getColor(requireContext(), R.color.main_white_dark)
+        val white   = ContextCompat.getColor(requireContext(), R.color.white70)
 
         val colors      = listOf(mainBlue, mainWhite)
         dataSet.setDrawValues(false)
@@ -257,9 +255,21 @@ class DashboardFragment : Fragment() {
         pieChart.description.isEnabled = false
         pieChart.setDrawEntryLabels(false)
         pieChart.animateY(800, Easing.EaseInOutQuad)
-        pieChart.setExtraOffsets(18f, 6f, 0f, 6f)
+        pieChart.setExtraOffsets(32f, 6f, 0f, 6f)
         pieChart.setTransparentCircleAlpha(0)
         pieChart.setHoleColor(Color.TRANSPARENT)
+        val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        pieChart.setCenterTextTypeface(boldTypeface)
+        pieChart.setCenterTextColor(white)
+        viewModel().getJumlahSurat.observe(viewLifecycleOwner, Observer {
+            if (it == 0) {
+                pieChart.setCenterTextSize(11f)
+                pieChart.centerText = "Data kosong"
+            } else {
+                pieChart.setCenterTextSize(16f)
+                pieChart.centerText = "${it.toInt()}"
+            }
+        })
 
         val legend: Legend = pieChart.legend
         legend.verticalAlignment = Legend.LegendVerticalAlignment.CENTER
@@ -281,14 +291,26 @@ class DashboardFragment : Fragment() {
 
             override fun onNothingSelected() {
                 // Potongan tidak dipilih, sembunyikan nilai
-                pieChart.centerText = ""
+                val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                pieChart.setCenterTextTypeface(boldTypeface)
+                pieChart.setCenterTextColor(white)
+                viewModel().getJumlahSurat.observe(viewLifecycleOwner, Observer {
+                    if (it == 0) {
+                        pieChart.setCenterTextSize(11f)
+                        pieChart.centerText = "Data kosong"
+                    } else {
+                        pieChart.setCenterTextSize(16f)
+                        pieChart.centerText = "${it.toInt()}"
+                    }
+                })
             }
         })
 
         pieChart.invalidate()
     }
 
-    private fun setChartBlue(pieChart: PieChart, entries: List<PieEntry>) {
+    private fun setChartBlue(jenis: Boolean, entries: List<PieEntry>) {
+        val pieChart: PieChart = if (jenis) find.cpSuratMasuk else find.cpSuratKeluar
         val dataSet = PieDataSet(entries, null)
 
         val rnbwGreen   = ContextCompat.getColor(requireContext(), R.color.rnbw_green)
@@ -297,9 +319,11 @@ class DashboardFragment : Fragment() {
         val rnbwPurple  = ContextCompat.getColor(requireContext(), R.color.rnbw_purple)
         val rnbwYellow  = ContextCompat.getColor(requireContext(), R.color.rnbw_yellow)
         val rnbwOrange  = ContextCompat.getColor(requireContext(), R.color.rnbw_orange)
+        val black  = ContextCompat.getColor(requireContext(), R.color.black_light)
         val mainWhite   = ContextCompat.getColor(requireContext(), R.color.main_white_dark)
+        val white   = ContextCompat.getColor(requireContext(), R.color.white70)
 
-        val colors = listOf(rnbwGreen, rnbwBlue, rnbwRed, rnbwPurple, rnbwYellow, rnbwOrange, Color.BLACK, mainWhite)
+        val colors = listOf(rnbwGreen, rnbwBlue, rnbwRed, rnbwPurple, rnbwYellow, rnbwOrange, black, mainWhite)
 
         dataSet.setDrawValues(false)
         dataSet.selectionShift = 6f
@@ -317,9 +341,22 @@ class DashboardFragment : Fragment() {
         pieChart.description.isEnabled = false
         pieChart.setDrawEntryLabels(false)
         pieChart.animateY(1200, Easing.EaseInOutQuad)
-        pieChart.setExtraOffsets(16f, 8f, 0f, 8f)
+        pieChart.setExtraOffsets(16f, 8f, 10f, 8f)
         pieChart.setTransparentCircleAlpha(0)
         pieChart.setHoleColor(Color.TRANSPARENT)
+        val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        pieChart.setCenterTextTypeface(boldTypeface)
+        pieChart.setCenterTextColor(white)
+        val jumlahData = if (jenis) viewModel().jumlahMasuk else viewModel().jumlahKeluar
+        jumlahData.observe(viewLifecycleOwner, Observer {
+            if (it.toInt() == 0){
+                pieChart.setCenterTextSize(12f)
+                pieChart.centerText = "Data tidak tersedia"
+            } else {
+                pieChart.setCenterTextSize(16f)
+                pieChart.centerText = "${it.toInt()}"
+            }
+        })
 
         val legend: Legend = pieChart.legend
         legend.verticalAlignment = Legend.LegendVerticalAlignment.CENTER
@@ -341,7 +378,19 @@ class DashboardFragment : Fragment() {
 
             override fun onNothingSelected() {
                 // Potongan tidak dipilih, sembunyikan nilai
-                pieChart.centerText = ""
+                val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                pieChart.setCenterTextTypeface(boldTypeface)
+                pieChart.setCenterTextColor(white)
+                val jumlahData = if (jenis) viewModel().jumlahMasuk else viewModel().jumlahKeluar
+                jumlahData.observe(viewLifecycleOwner, Observer {
+                    if (it.toInt() == 0){
+                        pieChart.setCenterTextSize(12f)
+                        pieChart.centerText = "Data tidak tersedia"
+                    } else {
+                        pieChart.setCenterTextSize(16f)
+                        pieChart.centerText = "${it.toInt()}"
+                    }
+                })
             }
         })
 
