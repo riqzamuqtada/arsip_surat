@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_white_light"
-    tools:context=".model.fragment.DashboardFragment">
+    tools:context=".view.fragment.DashboardFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -102,7 +102,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/ubuntu_medium"
-                    android:text="Diagram Jenis Surat"
+                    android:text="Semua Arsip Surat"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -125,9 +125,9 @@
             android:id="@+id/cardSrtMasuk"
             android:layout_width="0dp"
             android:layout_height="185dp"
-            android:clickable="true"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
             android:minHeight="140dp"
             app:cardBackgroundColor="@color/main_blue_dark"
             app:cardCornerRadius="12dp"
@@ -161,7 +161,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/ubuntu_medium"
-                    android:text="Diagram Surat"
+                    android:text="Arsip Surat"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -228,7 +228,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/ubuntu_medium"
-                    android:text="Diagram Surat"
+                    android:text="Arsip Surat"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"

@@ -1,4 +1,4 @@
-package com.kospin.arsipsurat.model
+package com.kospin.arsipsurat.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -1,6 +1,5 @@
-package com.kospin.arsipsurat.model.fragment
+package com.kospin.arsipsurat.view.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,26 +14,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kospin.arsipsurat.R
 import com.kospin.arsipsurat.adapter.DataAdapterSurat
 import com.kospin.arsipsurat.adapter.SuratAdapter
-import com.kospin.arsipsurat.databinding.FragmentSuratMasukBinding
+import com.kospin.arsipsurat.databinding.FragmentAllSuratBinding
 import com.kospin.arsipsurat.utils.DatePicker
 import com.kospin.arsipsurat.utils.PublicFunction
 import com.kospin.arsipsurat.viewmodel.SuratViewModel
 
-class SuratMasukFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var _find: FragmentSuratMasukBinding? = null
+class AllSuratFragment : Fragment() {
+
+    private var _find: FragmentAllSuratBinding? = null
     private val find get() = _find!!
     private lateinit var adapter: SuratAdapter
     private lateinit var selectedSpn: String
     private lateinit var selectedTgl: String
-    private val jenis: String = "Masuk"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _find = FragmentSuratMasukBinding.inflate(inflater, container, false)
+        _find = FragmentAllSuratBinding.inflate(inflater, container, false)
         return find.root
     }
 
@@ -46,17 +44,17 @@ class SuratMasukFragment : Fragment() {
             find.tvUsername.setText(it.toString())
         })
 
-//        set adapter
+//        adapter
         adapter = SuratAdapter(arrayListOf(), viewModel())
-        find.rvArsipSuratMasuk.adapter = adapter
-        find.rvArsipSuratMasuk.layoutManager = LinearLayoutManager(requireContext())
+        find.rvArsipSurat.adapter = adapter
+        find.rvArsipSurat.layoutManager = LinearLayoutManager(requireContext())
 
-//        search
+//        search data
         find.etSearch.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun afterTextChanged(s: Editable?) { }
             override fun onTextChanged(key: CharSequence?, start: Int, before: Int, count: Int) {
-                if (key.isNullOrEmpty()) {
+                if (key.isNullOrEmpty()){
                     tampilData()
                     find.btnFltSearchCancel.visibility = View.GONE
                     find.etSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_search, 0)
@@ -77,37 +75,38 @@ class SuratMasukFragment : Fragment() {
         }
 
 //        filter
-//        tanggal
-        find.tvFilterTanggalMasuk.setOnClickListener {
-            val datePicker = DatePicker()
-            datePicker.setOnDateSetListener {
-                find.tvFilterTanggalMasuk.setText(it)
-                find.btnCancelTanggalMasuk.visibility = View.VISIBLE
+//          tanggal
+        find.tvFilterTanggal.setOnClickListener {
+            val datePicker  = DatePicker()
+            datePicker.setOnDateSetListener { selectedDate ->
+                find.tvFilterTanggal.setText(selectedDate)
+                find.btnFltTanggalCancel.visibility = View.VISIBLE
             }
             datePicker.show(requireFragmentManager(), "datePicker")
         }
 
-        find.btnCancelTanggalMasuk.setOnClickListener {
-            find.tvFilterTanggalMasuk.text = null
-            find.btnCancelTanggalMasuk.visibility = View.GONE
+        find.btnFltTanggalCancel.setOnClickListener {
+            find.tvFilterTanggal.text = null
+            find.btnFltTanggalCancel.visibility = View.GONE
         }
 
-        find.tvFilterTanggalMasuk.addTextChangedListener(object : TextWatcher {
+        find.tvFilterTanggal.addTextChangedListener(object : TextWatcher{
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun afterTextChanged(s: Editable?) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                selectedTgl = find.tvFilterTanggalMasuk.text.toString()
+                selectedTgl = find.tvFilterTanggal.text.toString()
                 filter()
             }
+
         })
 
 //          divisi
-        val spnFilterDivisi = find.spnFilterDivisiMasuk
+        val spnFilterDivisi = find.spnFilterDivisi
         val spnAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, viewModel().divisi)
         spnFilterDivisi.adapter = spnAdapter
 
         spnFilterDivisi.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) { }
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -115,21 +114,25 @@ class SuratMasukFragment : Fragment() {
                 id: Long
             ) {
                 selectedSpn = parent?.getItemAtPosition(position).toString()
-                selectedTgl = find.tvFilterTanggalMasuk.text.toString()
+                selectedTgl = find.tvFilterTanggal.text.toString()
                 filter()
             }
+            override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        tampilData()
     }
 
     override fun onPause() {
         super.onPause()
         find.etSearch.text.clear()
+        find.tvFilterTanggal.text = null
+        find.btnFltTanggalCancel.visibility = View.GONE
+        find.spnFilterDivisi.setSelection(0)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        tampilData()
     }
 
     override fun onDestroyView() {
@@ -160,23 +163,23 @@ class SuratMasukFragment : Fragment() {
 
     private fun showNotif(data: List<DataAdapterSurat>, type: Boolean = false) {
         if (data.isEmpty()){
-            find.lyNotifikasiSrtMasuk.visibility = View.VISIBLE
+            find.lyNotifikasiSrt.visibility = View.VISIBLE
             if (type) {
-                find.imgNotifMasuk.setImageResource(R.drawable.img_empty_data)
-                find.tvNotifLabelMasuk.setText(R.string.empty_data_label)
-                find.tvNotifDescMasuk.setText(R.string.empty_data_desc)
+                find.imgNotif.setImageResource(R.drawable.img_empty_data)
+                find.tvNotifLabel.setText(R.string.empty_data_label)
+                find.tvNotifDesc.setText(R.string.empty_data_desc)
             } else {
-                find.imgNotifMasuk.setImageResource(R.drawable.img_not_found)
-                find.tvNotifLabelMasuk.setText(R.string.notfound_data_label)
-                find.tvNotifDescMasuk.setText(R.string.notfound_data_desc)
+                find.imgNotif.setImageResource(R.drawable.img_not_found)
+                find.tvNotifLabel.setText(R.string.notfound_data_label)
+                find.tvNotifDesc.setText(R.string.notfound_data_desc)
             }
         } else {
-            find.lyNotifikasiSrtMasuk.visibility = View.GONE
+            find.lyNotifikasiSrt.visibility = View.GONE
         }
     }
 
-    private fun tampilData() {
-        val data = viewModel().getJenisSrtNoFoto(jenis)
+    private fun tampilData(){
+        val data = viewModel().getAllSurat
         data.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
             showNotif(it, true)
@@ -184,25 +187,25 @@ class SuratMasukFragment : Fragment() {
     }
 
     private fun setSearch(key: CharSequence) {
-        val data = viewModel().cariSuratWithJenis("%$key%", jenis)
-        adapter.setData(data)
-        showNotif(data)
-    }
-
-    private fun setByDivisi() {
-        val data = viewModel().getByDivisiWithJenis(selectedSpn, jenis)
+        val data = viewModel().cariSurat("%$key%")
         adapter.setData(data)
         showNotif(data)
     }
 
     private fun setByTanggal() {
-        val data = viewModel().getByTanggalWithJenis(selectedTgl, jenis)
+        val data = viewModel().getByTanggal(selectedTgl)
+        adapter.setData(data)
+        showNotif(data)
+    }
+
+    private fun setByDivisi() {
+        val data = viewModel().getByDivisi(selectedSpn)
         adapter.setData(data)
         showNotif(data)
     }
 
     private fun setFiltered() {
-        val data = viewModel().getFilteredWithJenis(selectedSpn, selectedTgl, jenis)
+        val data = viewModel().getFiltered(selectedSpn, selectedTgl)
         adapter.setData(data)
         showNotif(data)
     }

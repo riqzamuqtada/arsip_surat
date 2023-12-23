@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.kospin.arsipsurat.model.DetailActivity
-import com.kospin.arsipsurat.model.InputActivity
+import com.kospin.arsipsurat.view.DetailActivity
+import com.kospin.arsipsurat.view.InputActivity
 import com.kospin.arsipsurat.R
 import com.kospin.arsipsurat.databinding.AdapterSuratBinding
 import com.kospin.arsipsurat.utils.PublicFunction

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/main_white_light"
     android:elevation="40dp"
-    tools:context=".model.DetailActivity">
+    tools:context=".view.DetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

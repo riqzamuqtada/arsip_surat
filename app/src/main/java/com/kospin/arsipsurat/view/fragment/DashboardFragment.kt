@@ -1,4 +1,4 @@
-package com.kospin.arsipsurat.model.fragment
+package com.kospin.arsipsurat.view.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -27,9 +27,9 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.kospin.arsipsurat.R
-import com.kospin.arsipsurat.model.LoginActivity
+import com.kospin.arsipsurat.view.LoginActivity
 import com.kospin.arsipsurat.databinding.FragmentDashboardBinding
-import com.kospin.arsipsurat.model.AboutActivity
+import com.kospin.arsipsurat.view.AboutActivity
 import com.kospin.arsipsurat.utils.PublicFunction
 import com.kospin.arsipsurat.viewmodel.SuratViewModel
 import kotlinx.coroutines.CoroutineScope

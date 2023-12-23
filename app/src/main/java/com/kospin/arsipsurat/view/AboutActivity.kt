@@ -1,16 +1,12 @@
-package com.kospin.arsipsurat.model
+package com.kospin.arsipsurat.view
 
 import android.content.Intent
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
-import com.github.chrisbanes.photoview.BuildConfig
 import com.kospin.arsipsurat.R
 import com.kospin.arsipsurat.databinding.ActivityAboutBinding
 import com.kospin.arsipsurat.utils.PublicFunction

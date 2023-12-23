@@ -1,4 +1,4 @@
-package com.kospin.arsipsurat.model
+package com.kospin.arsipsurat.view
 
 import android.app.Activity
 import android.content.Context
