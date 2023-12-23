@@ -26,12 +26,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="asd"
         android:textColor="@color/main_white_dark"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnDashboardMenu" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
@@ -57,6 +58,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -125,7 +127,7 @@
             android:id="@+id/cardSrtMasuk"
             android:layout_width="0dp"
             android:layout_height="185dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:clickable="true"
             android:minHeight="140dp"
@@ -246,6 +248,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/tvLabelDiagram3"
                     app:layout_constraintStart_toEndOf="@+id/tvLabelDiagram3"
                     app:layout_constraintTop_toTopOf="@+id/tvLabelDiagram3" />
+
                 <Button
                     android:id="@+id/btnToSrtKeluar"
                     android:layout_width="170dp"

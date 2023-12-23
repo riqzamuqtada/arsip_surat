@@ -21,7 +21,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ly_content_aboutapp"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
@@ -29,8 +29,6 @@
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/ly_content_aboutapp"
                 android:elevation="8dp"
-                android:maxWidth="480dp"
-                android:minWidth="320dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/bg_topleft">
 
@@ -800,45 +799,45 @@
                 android:id="@+id/letter_foreground"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="-32dp"
-                android:layout_marginEnd="-32dp"
-                android:layout_marginBottom="-116dp"
+                android:layout_marginStart="-48dp"
+                android:layout_marginEnd="-48dp"
+                android:layout_marginBottom="-140dp"
                 android:adjustViewBounds="true"
                 android:elevation="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/aboutapp_letter_foreground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/ly_content_aboutapp"
+                app:layout_constraintEnd_toEndOf="@id/ly_content_aboutapp"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="@id/ly_content_aboutapp" />
 
             <ImageView
                 android:id="@+id/letter_background"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="-32dp"
-                android:layout_marginEnd="-32dp"
-                android:layout_marginBottom="-116dp"
+                android:layout_marginStart="-48dp"
+                android:layout_marginEnd="-48dp"
+                android:layout_marginBottom="-140dp"
                 android:adjustViewBounds="true"
                 android:elevation="4dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/aboutapp_letter_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/ly_content_aboutapp"
+                app:layout_constraintEnd_toEndOf="@id/ly_content_aboutapp"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="@id/ly_content_aboutapp" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="-17dp"
                 android:elevation="12dp"
                 android:fontFamily="@font/inter"
                 android:text="\@ 2023 Arsip Surat | Dibangun dengan ❤️"
                 android:textColor="@color/text_secondary"
                 android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/ly_content_aboutapp"
                 app:layout_constraintEnd_toEndOf="@id/letter_foreground"
                 app:layout_constraintStart_toStartOf="@id/letter_foreground" />
 
