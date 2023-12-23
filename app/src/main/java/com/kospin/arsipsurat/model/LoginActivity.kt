@@ -28,10 +28,8 @@ class LoginActivity : AppCompatActivity() {
         find.btnLogin.setOnClickListener {
             if (inputUsername.text.isNotEmpty() && inputPassword.text.isNotEmpty()){
                 if (inputPassword.text.toString() == password){
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java).putExtra("username", inputUsername.text.toString()))
                     overridePendingTransition(R.anim.fade_in, R.anim.to_right)
-                    val sheredPreferences = getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
-                    sheredPreferences.edit().putString("username", inputUsername.text.toString()).apply()
                     finish()
                     PublicFunction.alert("Login Berhasil! Selamat datang ${inputUsername.text} \uD83C\uDF89", this)
                 } else{

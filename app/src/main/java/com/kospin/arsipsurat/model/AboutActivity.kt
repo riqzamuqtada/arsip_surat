@@ -1,6 +1,8 @@
 package com.kospin.arsipsurat.model
 
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
+import com.github.chrisbanes.photoview.BuildConfig
 import com.kospin.arsipsurat.R
 import com.kospin.arsipsurat.databinding.ActivityAboutBinding
 import com.kospin.arsipsurat.utils.PublicFunction
@@ -19,6 +22,9 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         find = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(find.root)
+
+        val version = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).versionName!!
+        find.tvVersionApp.setText("versi : $version")
 
         find.btnAboutBack.setOnClickListener {
             onBackPressed()
@@ -80,17 +86,22 @@ class AboutActivity : AppCompatActivity() {
         popupMenu.show()
     }
 
-    private fun openEmailProfile(email: String) {
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:$email")
-        }
+    private fun openEmailProfile(emailAddress: String) {
+        // Membuat Intent dengan action ACTION_SEND
+        val emailIntent = Intent(Intent.ACTION_SEND)
 
-        // Jika ada aplikasi email yang tersedia, buka aplikasi tersebut
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
+        // Menambahkan alamat email tujuan
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(emailAddress))
+
+        // Menentukan tipe MIME untuk intent
+        emailIntent.type = "message/rfc822"
+
+        // Mengecek apakah terdapat aplikasi email yang dapat menangani Intent
+        if (emailIntent.resolveActivity(packageManager) != null) {
+            // Menampilkan daftar aplikasi email yang tersedia
+            startActivity(Intent.createChooser(emailIntent, "Pilih Aplikasi Email"))
         } else {
-            // Jika tidak ada aplikasi email yang tersedia, tampilkan pesan atau aksi alternatif
-            // Contoh: Tampilkan pesan di Snackbar atau tampilkan formulir email di aplikasi Anda
+            // Handle jika tidak terdapat aplikasi email yang dapat menangani Intent
             PublicFunction.alert("Anda tidak memiliki aplikasi email", this)
         }
     }

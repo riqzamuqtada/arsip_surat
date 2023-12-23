@@ -14,7 +14,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.navigation.ActivityNavigatorExtras
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -53,11 +54,28 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
-        val username = sheredPreferences.getString("username", null)
-        find.tvDashboardUsername.setText(username.toString())
+        viewModel().username.observe(viewLifecycleOwner, Observer {
+            find.tvDashboardUsername.setText(it)
+        })
 
         find.btnDashboardMenu.setOnClickListener { showPopupMenu() }
+
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.fade_in)
+            .setExitAnim(R.anim.fade_out)
+            .build()
+        find.btnToSrtMasuk.setOnClickListener {
+            findNavController().navigate(R.id.toSuratMasuk, null, navOptions)
+            viewModel().setIdFragment(R.id.suratMasukFragment)
+        }
+        find.btnToSrtKeluar.setOnClickListener {
+            findNavController().navigate(R.id.toSuratKeluar, null, navOptions)
+            viewModel().setIdFragment(R.id.suratKeluarFragment)
+        }
+        find.btnToAllSrt.setOnClickListener {
+            findNavController().navigate(R.id.toAllSurat, null, navOptions)
+            viewModel().setIdFragment(R.id.allSuratFragment)
+        }
 
 //        pieChart jenis surat
         viewModel().dataPieJenis.observe(viewLifecycleOwner, Observer { data ->
@@ -66,12 +84,12 @@ class DashboardFragment : Fragment() {
 
 //        pieChart surat masuk
         viewModel().dataPieMasuk.observe(viewLifecycleOwner, Observer { data ->
-            setChartBlue(find.cpSuratMasuk, data)
+            setChartBlue(true, data)
         })
 
 //        pieChart surat keluar
         viewModel().dataPieKeluar.observe(viewLifecycleOwner, Observer { data ->
-            setChartBlue(find.cpSuratKeluar, data)
+            setChartBlue(false, data)
         })
 
     }
@@ -100,8 +118,8 @@ class DashboardFragment : Fragment() {
                 else -> false
             }
         }
-
         popupMenu.show()
+
     }
 
     private fun aboutappPage() {
@@ -119,6 +137,7 @@ class DashboardFragment : Fragment() {
         builder.setPositiveButton("Hapus dan Bersihkan"){ dialog, _ ->
             CoroutineScope(Dispatchers.Main).launch {
                 deleteAllTemporaryFiles()
+                clearAppCache(requireContext())
                 PublicFunction.alert("Cache dan sampah telah berhasil dihapus. Ruang penyimpanan kini lebih optimal. \uD83D\uDE80", requireContext())
             }
         }
@@ -137,6 +156,38 @@ class DashboardFragment : Fragment() {
         positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.clr_red))
         negativeButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_hard))
 
+    }
+    private fun clearAppCache(context: Context) {
+        try {
+            val cacheDir = context.cacheDir
+            val cacheDirectory = File(cacheDir.path)
+
+            if (cacheDirectory.exists()) {
+                deleteDir(cacheDirectory)
+            }
+
+            context.externalCacheDir?.let { externalCacheDir ->
+                val externalCacheDirectory = File(externalCacheDir.path)
+                if (externalCacheDirectory.exists()) {
+                    deleteDir(externalCacheDirectory)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun deleteDir(dir: File): Boolean {
+        if (dir.isDirectory) {
+            val children = dir.list()
+            for (i in children.indices) {
+                val success = deleteDir(File(dir, children[i]))
+                if (!success) {
+                    return false
+                }
+            }
+        }
+        return dir.delete()
     }
 
     private fun deleteAllTemporaryFiles() {
@@ -161,12 +212,10 @@ class DashboardFragment : Fragment() {
         builder.setMessage("Apakah Anda yakin ingin keluar dari akun Anda? Keluar akan mengakhiri sesi.")
 
         builder.setPositiveButton("Logout"){ dialog, _ ->
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-            val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
-            sheredPreferences.edit().clear().apply()
-            requireActivity().finish()
             dialog.dismiss()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
             PublicFunction.alert("Logout Berhasil! Sampai jumpa lagi. \uD83D\uDC4B", requireContext())
+            requireActivity().finish()
         }
 
         builder.setNegativeButton("Batal"){ dialog, _ ->
@@ -195,6 +244,7 @@ class DashboardFragment : Fragment() {
 
         val mainBlue    = ContextCompat.getColor(requireContext(), R.color.main_blue_dark)
         val mainWhite   = ContextCompat.getColor(requireContext(), R.color.main_white_dark)
+        val white   = ContextCompat.getColor(requireContext(), R.color.white70)
 
         val colors      = listOf(mainBlue, mainWhite)
         dataSet.setDrawValues(false)
@@ -205,9 +255,21 @@ class DashboardFragment : Fragment() {
         pieChart.description.isEnabled = false
         pieChart.setDrawEntryLabels(false)
         pieChart.animateY(800, Easing.EaseInOutQuad)
-        pieChart.setExtraOffsets(18f, 6f, 0f, 6f)
+        pieChart.setExtraOffsets(32f, 6f, 0f, 6f)
         pieChart.setTransparentCircleAlpha(0)
         pieChart.setHoleColor(Color.TRANSPARENT)
+        val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        pieChart.setCenterTextTypeface(boldTypeface)
+        pieChart.setCenterTextColor(white)
+        viewModel().getJumlahSurat.observe(viewLifecycleOwner, Observer {
+            if (it == 0) {
+                pieChart.setCenterTextSize(11f)
+                pieChart.centerText = "Data kosong"
+            } else {
+                pieChart.setCenterTextSize(16f)
+                pieChart.centerText = "${it.toInt()}"
+            }
+        })
 
         val legend: Legend = pieChart.legend
         legend.verticalAlignment = Legend.LegendVerticalAlignment.CENTER
@@ -229,14 +291,26 @@ class DashboardFragment : Fragment() {
 
             override fun onNothingSelected() {
                 // Potongan tidak dipilih, sembunyikan nilai
-                pieChart.centerText = ""
+                val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                pieChart.setCenterTextTypeface(boldTypeface)
+                pieChart.setCenterTextColor(white)
+                viewModel().getJumlahSurat.observe(viewLifecycleOwner, Observer {
+                    if (it == 0) {
+                        pieChart.setCenterTextSize(11f)
+                        pieChart.centerText = "Data kosong"
+                    } else {
+                        pieChart.setCenterTextSize(16f)
+                        pieChart.centerText = "${it.toInt()}"
+                    }
+                })
             }
         })
 
         pieChart.invalidate()
     }
 
-    private fun setChartBlue(pieChart: PieChart, entries: List<PieEntry>) {
+    private fun setChartBlue(jenis: Boolean, entries: List<PieEntry>) {
+        val pieChart: PieChart = if (jenis) find.cpSuratMasuk else find.cpSuratKeluar
         val dataSet = PieDataSet(entries, null)
 
         val rnbwGreen   = ContextCompat.getColor(requireContext(), R.color.rnbw_green)
@@ -245,8 +319,11 @@ class DashboardFragment : Fragment() {
         val rnbwPurple  = ContextCompat.getColor(requireContext(), R.color.rnbw_purple)
         val rnbwYellow  = ContextCompat.getColor(requireContext(), R.color.rnbw_yellow)
         val rnbwOrange  = ContextCompat.getColor(requireContext(), R.color.rnbw_orange)
+        val black  = ContextCompat.getColor(requireContext(), R.color.black_light)
+        val mainWhite   = ContextCompat.getColor(requireContext(), R.color.main_white_dark)
+        val white   = ContextCompat.getColor(requireContext(), R.color.white70)
 
-        val colors = listOf(rnbwGreen, rnbwBlue, rnbwRed, rnbwPurple, rnbwYellow, rnbwOrange)
+        val colors = listOf(rnbwGreen, rnbwBlue, rnbwRed, rnbwPurple, rnbwYellow, rnbwOrange, black, mainWhite)
 
         dataSet.setDrawValues(false)
         dataSet.selectionShift = 6f
@@ -264,9 +341,22 @@ class DashboardFragment : Fragment() {
         pieChart.description.isEnabled = false
         pieChart.setDrawEntryLabels(false)
         pieChart.animateY(1200, Easing.EaseInOutQuad)
-        pieChart.setExtraOffsets(16f, 8f, 0f, 8f)
+        pieChart.setExtraOffsets(16f, 8f, 10f, 8f)
         pieChart.setTransparentCircleAlpha(0)
         pieChart.setHoleColor(Color.TRANSPARENT)
+        val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        pieChart.setCenterTextTypeface(boldTypeface)
+        pieChart.setCenterTextColor(white)
+        val jumlahData = if (jenis) viewModel().jumlahMasuk else viewModel().jumlahKeluar
+        jumlahData.observe(viewLifecycleOwner, Observer {
+            if (it.toInt() == 0){
+                pieChart.setCenterTextSize(12f)
+                pieChart.centerText = "Data tidak tersedia"
+            } else {
+                pieChart.setCenterTextSize(16f)
+                pieChart.centerText = "${it.toInt()}"
+            }
+        })
 
         val legend: Legend = pieChart.legend
         legend.verticalAlignment = Legend.LegendVerticalAlignment.CENTER
@@ -288,7 +378,19 @@ class DashboardFragment : Fragment() {
 
             override fun onNothingSelected() {
                 // Potongan tidak dipilih, sembunyikan nilai
-                pieChart.centerText = ""
+                val boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                pieChart.setCenterTextTypeface(boldTypeface)
+                pieChart.setCenterTextColor(white)
+                val jumlahData = if (jenis) viewModel().jumlahMasuk else viewModel().jumlahKeluar
+                jumlahData.observe(viewLifecycleOwner, Observer {
+                    if (it.toInt() == 0){
+                        pieChart.setCenterTextSize(12f)
+                        pieChart.centerText = "Data tidak tersedia"
+                    } else {
+                        pieChart.setCenterTextSize(16f)
+                        pieChart.centerText = "${it.toInt()}"
+                    }
+                })
             }
         })
 

@@ -42,9 +42,9 @@ class SuratKeluarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //        set username
-        val sheredPreferences = requireActivity().getSharedPreferences("sheredFile", Context.MODE_PRIVATE)
-        val username = sheredPreferences.getString("username", null)
-        find.tvUsername.setText(username.toString())
+        viewModel().username.observe(viewLifecycleOwner, Observer {
+            find.tvUsername.setText(it.toString())
+        })
 
         // set adapter
         adapter = SuratAdapter(arrayListOf(),viewModel())
