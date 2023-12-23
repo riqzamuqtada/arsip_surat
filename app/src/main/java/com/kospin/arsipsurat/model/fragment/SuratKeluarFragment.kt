@@ -52,17 +52,29 @@ class SuratKeluarFragment : Fragment() {
         find.rvArsipSuratKeluar.layoutManager = LinearLayoutManager(requireContext())
 
         // search
-        find.etSearchKeluar.addTextChangedListener(object : TextWatcher{
+        find.etSearch.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun afterTextChanged(s: Editable?) { }
             override fun onTextChanged(key: CharSequence?, start: Int, before: Int, count: Int) {
                 if (key.isNullOrEmpty()){
                     tampilData()
+                    find.btnFltSearchCancel.visibility = View.GONE
+                    find.etSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_search, 0)
                 } else {
                     setSearch(key)
+                    find.etSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0)
+                    find.btnFltSearchCancel.visibility = View.VISIBLE
                 }
             }
         })
+
+        find.btnFltSearchCancel.setOnClickListener {
+            find.etSearch.text.clear()
+            find.etSearch.clearFocus()
+            PublicFunction.hideKeyboard(requireContext(), find.etSearch)
+            find.etSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_search, 0)
+            find.btnFltSearchCancel.visibility = View.GONE
+        }
 
         //filter
         //tanggal
@@ -117,7 +129,7 @@ class SuratKeluarFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        find.etSearchKeluar.text.clear()
+        find.etSearch.text.clear()
     }
 
     override fun onDestroyView() {

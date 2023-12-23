@@ -17,6 +17,7 @@
         <activity
             android:name=".model.MainActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".model.DetailActivity"

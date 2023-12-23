@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
@@ -57,11 +58,23 @@ class AllSuratFragment : Fragment() {
             override fun onTextChanged(key: CharSequence?, start: Int, before: Int, count: Int) {
                 if (key.isNullOrEmpty()){
                     tampilData()
+                    find.btnFltSearchCancel.visibility = View.GONE
+                    find.etSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_search, 0)
                 } else {
                     setSearch(key)
+                    find.etSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0)
+                    find.btnFltSearchCancel.visibility = View.VISIBLE
                 }
             }
         })
+
+        find.btnFltSearchCancel.setOnClickListener {
+            find.etSearch.text.clear()
+            find.etSearch.clearFocus()
+            PublicFunction.hideKeyboard(requireContext(), find.etSearch)
+            find.etSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_search, 0)
+            find.btnFltSearchCancel.visibility = View.GONE
+        }
 
 //        filter
 //          tanggal

@@ -7,11 +7,9 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import com.kospin.arsipsurat.R
-import com.kospin.arsipsurat.roomdb.DbArsipSurat
 import com.kospin.arsipsurat.databinding.ActivityDetailBinding
 import com.kospin.arsipsurat.roomdb.Surat
 import com.kospin.arsipsurat.utils.PublicFunction
-import kotlin.properties.Delegates
 
 class DetailActivity : AppCompatActivity() {
 
@@ -49,18 +47,17 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val scaleUp     = AnimationUtils.loadAnimation(this, R.anim.scale_up)
-        val scaleDown   = AnimationUtils.loadAnimation(this, R.anim.scale_down)
 
 //        fungsi button
         find.btnDetailBack.setOnClickListener {
             onBackPressed()
         }
         find.imgDetailSurat.setOnClickListener {
-            find.lyFotoZoom.startAnimation(scaleUp)
-            find.lyFotoZoom.visibility = View.VISIBLE
+            find.lyDetailHeader.visibility = View.VISIBLE
+            find.lyDetailFoto.visibility = View.VISIBLE
+            find.imgPhotoView.startAnimation(scaleUp)
         }
         find.btnZoomBack.setOnClickListener {
-            find.lyFotoZoom.startAnimation(scaleDown)
             onBackPressed()
         }
 
@@ -72,8 +69,14 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (find.lyFotoZoom.visibility == View.VISIBLE){
-            find.lyFotoZoom.visibility = View.GONE
+        val scaleDown   = AnimationUtils.loadAnimation(this, R.anim.scale_down)
+        val toTop       = AnimationUtils.loadAnimation(this, R.anim.to_top)
+
+        if (find.lyDetailFoto.visibility == View.VISIBLE && find.lyDetailHeader.visibility == View.VISIBLE){
+            find.lyDetailHeader.visibility = View.GONE
+            find.lyDetailFoto.visibility = View.GONE
+            find.lyDetailHeader.startAnimation(toTop)
+            find.lyDetailFoto.startAnimation(scaleDown)
             find.imgPhotoView.scale = initialScale.toFloat()
         } else {
             super.onBackPressed()

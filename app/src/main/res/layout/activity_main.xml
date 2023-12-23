@@ -41,11 +41,9 @@
         app:itemIconTint="?attr/colorButtonNormal"
         app:itemRippleColor="@color/main_blue_light"
         app:labelVisibilityMode="unlabeled"
-        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:menu="@menu/bottom_navbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

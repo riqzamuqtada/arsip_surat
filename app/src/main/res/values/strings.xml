@@ -12,7 +12,7 @@
     <!--  About App  -->
     <string name="dev1_name">Muh Riqza Muqtada</string>
     <string name="dev2_name">Fithnan Ri’atan</string>
-    <string name="dev3_name">Hafshoh Nailal Izza</string>
+    <string name="dev3_name">Hafshoh Nailal Izzah</string>
     <string name="dev4_name">Essa Citra Adelia</string>
     <string name="dev1_job"><![CDATA[System Analyst &\nBackend Developer]]></string>
     <string name="dev2_job"><![CDATA[UI UX Designer &\nFrontend Developer]]></string>
@@ -23,7 +23,7 @@
     <string name="about_title_privacy">Kebijakan Privasi</string>
     <string name="about_title_support">Dukungan</string>
     <string name="about_title_credits">Credits</string>
-    <string name="about_desc">ArsipSurat adalah aplikasi mobile yang dirancang untuk memudahkan penyimpanan dan pengelolaan arsip surat pada perusahaan Kospin Jasa. Dibuat dengan dedikasi oleh tim siswa magang dari SMK Syafi\'i Akrom, kami berkomitmen untuk menyediakan solusi yang efisien dan handal bagi kebutuhan arsip surat perusahaan Anda.</string>
+    <string name="about_desc">ArsipSurat adalah aplikasi mobile yang dirancang untuk memudahkan penyimpanan dan pengelolaan arsip surat pada perusahaan Kospin Jasa. Dibuat dengan dedikasi oleh tim siswa magang dari SMK Syafi\'i Akrom, kami berkomitmen untuk menyediakan solusi yang efisien dan handal bagi kebutuhan arsip surat perusahaan.</string>
     <string name="about_desc_disclaimer">Aplikasi ini disediakan tanpa jaminan apapun. Penggunaan aplikasi ini sepenuhnya menjadi tanggung jawab pengguna.</string>
     <string name="about_desc_privacy">ArsipSurat tidak mengumpulkan data pribadi pengguna. Semua informasi yang dimasukkan dan disimpan dalam aplikasi ini sepenuhnya milik perusahaan Kospin Jasa. Aplikasi ini tidak menggunakan cookie atau teknologi pelacakan serupa.</string>
     <string name="about_desc_support">Jika Anda mengalami masalah atau memiliki pertanyaan, jangan ragu untuk menghubungi kami.</string>

@@ -4,6 +4,7 @@
         <!-- Customize your dark theme here. -->
         <item name="colorPrimary">@color/main_blue_dark</item>
         <item name="colorButtonNormal">@color/main_blue_light</item>
+        <item name="android:textColorHighlight">@color/text_highlight</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>

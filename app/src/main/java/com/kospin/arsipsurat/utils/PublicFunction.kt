@@ -1,6 +1,8 @@
 package com.kospin.arsipsurat.utils
 
 import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.kospin.arsipsurat.roomdb.DbArsipSurat
@@ -16,6 +18,11 @@ object PublicFunction {
         val factory = SuratViewModelFactory(repository)
         val viewModel = ViewModelProviders.of(context as androidx.fragment.app.FragmentActivity, factory).get(SuratViewModel::class.java)
         return viewModel
+    }
+
+    fun hideKeyboard(context: Context, view: View) {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     fun alert(msg: String, context: Context) {

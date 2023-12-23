@@ -56,27 +56,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etSearchKeluar"
+    <LinearLayout
+        android:id="@+id/lySearch"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ip_nav_surat"
-        android:drawableEnd="@drawable/ic_search"
+        android:orientation="horizontal"
         android:elevation="2dp"
-        android:ems="10"
-        android:fontFamily="@font/poppins"
-        android:hint="Search"
-        android:inputType="text"
-        android:paddingHorizontal="12dp"
-        android:textColor="@color/main_blue_dark"
-        android:textColorHint="#A0A0A0"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ip_nav_surat"
+            android:drawableEnd="@drawable/ic_search"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Search"
+            android:inputType="text"
+            android:paddingHorizontal="12dp"
+            android:textColor="@color/main_blue_dark"
+            android:textColorHint="#A0A0A0"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/btnFltSearchCancel"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ip_nav_surat"
+            android:src="@drawable/ic_cancel"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -86,7 +104,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearchKeluar">
+        app:layout_constraintTop_toBottomOf="@+id/lySearch">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
